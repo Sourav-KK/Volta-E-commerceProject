@@ -1,0 +1,167 @@
+<div class="page-wrapper">
+    <main class="main">
+        <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+            style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+            <div class="container">
+                <div class="form-box">
+                    <div class="form-tab">
+                        <ul class="nav nav-pills nav-fill" role="tablist">
+                            <!-- <li class="nav-item">
+							        <a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="false">in signup Log in</a>
+							    </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2"
+                                    role="tab" aria-controls="register-2" aria-selected="true">Register</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="register-2" role="tabpanel"
+                                aria-labelledby="register-tab-2">
+                                <form action="/signup" method="post">
+                                    <div class="form-group">
+                                        <label for="register-email-2">Name *</label>
+                                        <span class="text-danger" id="nameError"></span>
+                                        <input type="text" class="form-control" id="register-name" minlength="4"
+                                            name="name" required onkeyup="validatename()">
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="register-email-2">Email id *</label>
+                                        <span class="text-danger" id="email-error"></span>
+                                        <input type="email" class="form-control" id="register-email-2" name="email"
+                                            required onkeyup="validateEmail()">
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="register-email-2">Mobile number *</label>
+                                        <span class="text-danger" id="numbererror"></span>
+                                        <input type="text" class="form-control" id="register-number" name="mobile"
+                                            maxlength="10" required onkeyup="validatenumber()">
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="register-password-2">Password *</label>
+                                        <span class="text-danger" id="passwordError"></span>
+                                        <input type="password" class="form-control" id="register-password-2"
+                                            name="password" required onkeyup="validatepassword()">
+                                    </div><!-- End .form-group -->
+
+                                    <div class="form-footer">
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>SIGN UP</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                        <!-- <span class="btn btn-outline-primary-2"><a href="/OTPLogin">OTP Login</a></span> -->
+
+                                    </div><!-- End .form-footer -->
+                                    <div>
+                                        <span>
+                                            <a class="btn btn-outline-primary-2" href="/OTPLogin">OTP Login <i
+                                                    class="icon-long-arrow-right"></i></a>
+                                        </span>
+                                        <span class="btn btn-outline-primary-2">
+                                            <a href="/login">Log in <i class="icon-long-arrow-right"></i></a> </span>
+                                        <div class="btn btn-outline-primary-2"><a href="/">Main Page <i
+                                                    class="icon-long-arrow-right"></i></a>
+                                        </div>
+
+                                </form>
+                            </div><!-- .End .tab-pane -->
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .form-tab -->
+                </div><!-- End .form-box -->
+            </div><!-- End .container -->
+        </div><!-- End .login-page section-bg -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+
+<script>
+    var emailerror = document.getElementById('email-error');
+    var passworderror = document.getElementById('passwordError');
+    var nameerror = document.getElementById('nameError');
+    var numbererror = document.getElementById('numbererror');
+
+
+    function validateEmail() {
+        var emails = document.getElementById('register-email-2').value;
+
+        if (emails.value = " ") {
+            emailerror.innerHTML = " This field is required";
+            return false;
+        }
+        if (emails.length == 0) {
+            emailerror.innerHTML = " This field is required";
+            return false;
+        }
+        if (!emails.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+            emailerror.innerHTML = " Email address cannot be validated";
+            return false;
+        }
+        emailerror.innerHTML = '';
+        return true;
+    }
+
+    function validatepassword() {
+        let password = document.getElementById("register-password-2").value;
+        if (password.length == 0) {
+            passworderror.innerHTML = " This Field is Required !";
+            return false;
+        }
+        if (password.length < 6) {
+            passworderror.innerHTML = " Minimum 6 characters required  !";
+            return false;
+        }
+        if (!password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
+            passworderror.innerHTML = "Must contain atleast 1 special character and number !";
+            return false;
+        }
+        passworderror.innerHTML = '';
+        return true;
+    }
+    function validatename() {
+        let name = document.getElementById("register-name").value;
+        if (name.length == 0) {
+            passworderror.innerHTML = " This Field is Required !";
+            return false;
+        }
+        if (!name.match(/^[a-zA-Z ]*$/)) {
+            nameerror.innerHTML = "Must not contain any special character or digits !";
+            return false;
+        }
+        if (name.length < 4) {
+            nameerror.innerHTML = " Minimum 4 characters required  !";
+            return false;
+        }
+        nameerror.innerHTML = '';
+        return true;
+    }
+    function validatenumber() {
+        let number = document.getElementById("register-number").value;
+        if (number.length == 0) {
+            numbererror.innerHTML = " This Field is Required !";
+            return false;
+        }
+        if (number.length > 10) {
+            numbererror.innerHTML = " Maximum 10 digits allowed !";
+            return false;
+        }
+        if (number.length < 10) {
+            numbererror.innerHTML = " Minimum 10 digits required !";
+            return false;
+        }
+        if (!number.match(/^[0-9]{10}$/)) {
+            numbererror.innerHTML = "Only digits are allowed !";
+            return false;
+        }
+        numbererror.innerHTML = '';
+        return true;
+    }
+
+    function validateForm() {
+        if (!validateEmail() || !validatepassword() || !validatename() || !validatenumber()) {
+            return false;
+        }
+    }
+</script>
+
+<!-- molla/login.html  22 Nov 2019 10:04:03 GMT -->

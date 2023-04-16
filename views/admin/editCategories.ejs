@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <div class="main-panel">
+    <div class="container">
+      <div class="col-lg-12 mt-5">
+        <h2 class="text-center text-primary mt-2">Edit existing Category</h2>
+        <form action="/admin/editcategory?id=<%=catD._id%>" method="post" enctype="multipart/form-data">
+          <label for="">Category</label>
+          <input type="text" class="form-control" name="category" value="<%= catD.category %> " required>
+          <button type="submit" class="btn btn-success mt-4 mb-4">SUBMIT</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

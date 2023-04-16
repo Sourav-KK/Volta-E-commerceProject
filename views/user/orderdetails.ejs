@@ -1,0 +1,147 @@
+<div class="page-wrapper">
+    <main class="main">
+        <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+            <div class="container-fluid">
+                <h1 class="page-title">Order Details<span>Shop</span></h1>
+            </div><!-- End .container-fluid -->
+        </div><!-- End .page-header -->
+
+        <div class="page-content">
+            <div class="categories-page">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <% for (let i=0; i < product.length; i++) { %>
+                            <div class="container-fluid">
+                                <table class="ui striped table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="height: 50rem;width: 100px; ">
+                                                <img src=/productImages/<%=product[i].products._id %>0.jpg
+                                                alt="Productimage">
+                                            </td>
+                                            <td>
+                                                <!-- <a href="#"
+                                                    class="list-group-item list-group-item-action flex-column align-items-start"> -->
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h5 class="mb-1">
+                                                        <%=product[i].products.name %>
+                                                    </h5>
+                                                </div>
+                                                <p class="mb-1">
+                                                    Quantity: <%=product[i].qty %>
+                                                </p>
+                                                <!-- <h5 class="mb-1">Price : ₹ <%=product[i].products.marketPrice %>
+                                                </h5> -->
+                                                <h5 class="mb-1">Total : ₹
+                                                    <%=product[i].products.marketPrice*product[i].qty%>
+                                                </h5>
+                                                <small class="text-muted">Donec id elit non mi porta.</small>
+                                                <span>
+                                                    <% if (product[i].return) { %>
+                                                        <h4> The item was returned </h4>
+                                                        <%}else{ %>
+                                                            <a class="btn btn-primary" type="button"
+                                                                onclick="returnProduct('<%=product[i]._id%>,<%=product[i].itemId%>,<%=product[i].item%>,<%=product[i].qty %>')">return
+                                                            </a>
+                                                            <% } %>
+                                                </span>
+                                                <!-- </a> -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <% } %>
+
+                                <!-- for fun -->
+                                
+                                <div class="container">
+                                    <% for (let i=0; i < product.length; i++) { %>
+                                    <div class="card">
+                                        <figure>
+                                            <img src=/productImages/<%=product[i].products._id %>0.jpg alt="Image">
+                                        </figure>
+                                        <div class="card-content">
+                                            <h3>Name: <%=product[i].products.name %></h3>
+                                            <p>Quantity: <%=product[i].qty %></p>
+                                            <p>Price: <%=product[i].products.marketPrice*product[i].qty%></p>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                </div>
+                                <!-- for fun -->
+
+                    </div><!-- End .row -->
+                </div><!-- End .container-fluid -->
+            </div><!-- End .categories-page -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+
+</div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+
+<script>
+    function returnProduct(orderId, itemId, productId, quantity) {
+        $.ajax({
+            url: '/returnItem',
+            data: { orderId, itemId, productId, quantity },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    alert('success')
+                    location.reload()
+                }
+                else {
+                    alert(' Error in returning product')
+                    location.reload()
+                }
+            }
+        })
+    }
+
+
+</script>
+
+<style>
+    .card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 80%;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .card img {
+        width: 150px;
+        height: auto;
+        margin-right: 20px;
+    }
+
+    .card-content {
+        flex: 1;
+    }
+
+    .card h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+</style>

@@ -1,0 +1,95 @@
+<div class="container mt-5">
+
+    <div class="row" style="flex-direction: row; justify-content: space-evenly;">
+        <div class="card" style="width: 18rem;" onclick="changeCover('<%- products._id %>0','<%- products._id %>0')">
+            <img class="card-img-top" style="width: 18rem; height: 10rem;" src="/productImages/<%= products._id %>0.jpg"
+                alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">1. <%= products.name %>.</p>
+                <p style="color: #4b49ac;"> Current cover image</p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;" onclick="changeCover('<%- products._id %>1','<%- products._id %>0')">
+            <img class="card-img-top" style="width: 18rem; height: 10rem;" src="/productImages/<%= products._id %>1.jpg"
+                alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">2. <%= products.name %>.</p>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row" style="flex-direction: row; justify-content: space-evenly;">
+        <div class="card" style="width: 18rem;" onclick="changeCover('<%- products._id %>2','<%- products._id %>0')">
+            <img class="card-img-top" style="width: 18rem; height: 10rem;" src="/productImages/<%= products._id %>2.jpg"
+                alt="Card image cap">
+            <div class="card-body" >
+                <p class="card-text">3. <%= products.name %>.</p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;" onclick="changeCover('<%- products._id %>3','<%- products._id %>0')">
+            <img class="card-img-top" style="width: 18rem; height: 10rem;" src="/productImages/<%= products._id %>3.jpg"
+                alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">4. <%= products.name %>.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 100000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+    function changeCover(imageId, defaultId) {
+        console.log(imageId, ' hdahkj ');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to make this image as the cover image",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, make changes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/admin/editImage',
+                    data: {
+                        imageId: imageId,
+                        defaultId: defaultId
+                    },
+                    method: 'POST',
+                    success: (response) => {
+                        if (response.status == true) {
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Changes saved'
+                            })
+                            window.location.reload()
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                                footer: '<a href="/">OK</a>'
+                            })
+                        }
+                    }
+                })
+            }
+        }
+        )
+    }
+</script>

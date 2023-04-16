@@ -1,0 +1,140 @@
+<div class="page-wrapper">
+    <main class="main">
+        <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+            <div class="container">
+                <h1 class="page-title">Order History</h1>
+            </div>
+        </div>
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> <a href="/orderlist">My Orders</a></li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+        <div class="page-content">
+            <div class="container">
+                <div class="table-responsive pt-3">
+                    <table class="table table-hover table-bordered ">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;vertical-align: middle;">No.</th>
+                                <th style="text-align: center;vertical-align: middle;">Date</th>
+                                <!-- <th style="text-align: center;vertical-align: middle;">Name</th> -->
+                                <th style="text-align: center;vertical-align: middle;">Ship to</th>
+                                <!-- <th style="text-align: center;vertical-align: middle;">Quantity</th> -->
+                                <th style="text-align: center;vertical-align: middle;">Details</th>
+                                <th style="text-align: center;vertical-align: middle;">Amount &
+                                    <p>Payment method</p>
+                                </th>
+                                <th style="text-align: center;vertical-align: middle;">Order Status</th>
+                                <th style="text-align: center;vertical-align: middle;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (locals.orders){for (let i=0; i <orders.length ; i++) {%>
+                                <tr>
+                                    <td class="No col-0" style="text-align: center;vertical-align: middle;">
+                                        <%=i+1%>
+                                    </td>
+                                    <td class="date col-1" style="text-align: center;vertical-align: middle;">
+                                        <%=orders[i].date.toDateString()%>
+                                    </td>
+                                    <!-- <td class="name" style="text-align: center;vertical-align: middle;"></td> -->
+                                    <td class="address col-3" style="text-align: center;vertical-align: middle;">
+                                        <%=orders[i].deliveryDetails.name%>, <%=orders[i].deliveryDetails.address%>,
+                                                <%=orders[i].deliveryDetails.state%>,
+                                                    PINCODE: <%=orders[i].deliveryDetails.pincode%>
+                                    </td>
+                                    <!-- <td class="pincode" style="text-align: center;vertical-align: middle;">
+                                    <%=orders[i].deliveryDetails.products%></td> -->
+
+                                    <td class="order col-1" style="text-align: center;vertical-align: middle;">
+                                        <a href="/orderdetails?id=<%=orders[i]._id %>">Order Details</a>
+                                    </td>
+
+                                    <td class="total col-1" style="text-align: center;vertical-align: middle;">
+                                        ₹ <%=orders[i].deliveryDetails.total.toFixed(2)%> 
+                                            <%if(orders[i]?.paymentStatus==='Pending'){%>
+                                                <p style="color: red;"  title="Not paid">
+                                                    (<%=orders[i].deliveryDetails.paymentMethod%>)
+                                                </p>
+                                            <%}else{ %>
+                                            <p  style="color: #A6C76C;"title="Paid">
+                                                (<%=orders[i].deliveryDetails.paymentMethod%>)
+                                            </p>
+                                            <% } %>
+                                    </td>
+
+                                    <td class="paymentMethod col-1" style="text-align: center;vertical-align: middle;">
+                                            <% if(orders[i]?.orderStatus==0) {%>
+                                                <p style="color:darkblue;"> Processing</p>
+                                            <%}else if (orders[i]?.orderStatus==1){%>
+                                                <p style="color: #A6C76C;">Shipped</p>
+                                            <%}else if (orders[i]?.orderStatus==2){%>
+                                                <p style="color: #A6C76C;">Delivered</p>
+                                            <%}else if (orders[i]?.orderStatus==3){%>
+                                                <p style="color: violet;">Cancelled</p>
+                                            <%}%>
+                                    </td>
+
+                                    <td style="text-align: center;vertical-align: middle;">
+                                        <% if(orders[i]?.orderStatus <2 ){%>
+                                            <a type="button" href="/cancelorder?id=<%= orders[i]._id %>"
+                                                onclick=" return confirm('Are you sure you want to cancel your order ????')"
+                                                class="btn btn-danger btn-sm btn-icon-text btn-icon-prepend">
+                                                Cancel Order
+                                            </a>
+                                        <%}else if(orders[i]?.orderStatus==2 ){%>
+                                            <p class="font-weight-bold text-info">Delivered </p> 
+                                            <!-- <a type = "button" href="" onclick=" return confirm('Are you sure you want to return your order ????')"
+                                            class="btn btn-danger btn-sm btn-icon-text btn-icon-prepend"class="btn btn-danger btn-sm btn-icon-text btn-icon-prepend" title="Click to return product">Return product</a> -->
+                                        <%}else{ %>
+                                            <p class="font-weight-bold text-danger">
+                                                Cancelled</p>
+                                        <%} %>
+                                    </td>
+                                </tr>
+                            <%} }%>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="wishlist-share">
+                    <div class="social-icons social-icons-sm mb-2">
+                        <label class="social-label">Share on:</label>
+                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i
+                                class="icon-facebook-f"></i></a>
+                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i
+                                class="icon-instagram"></i></a>
+                        <a href="#" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                        <a href="#" class="social-icon" title="Pinterest" target="_blank"><i
+                                class="icon-pinterest"></i></a>
+                    </div><!-- End .soial-icons -->
+                </div><!-- End .wishlist-share -->
+            </div><!-- End .container -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+</div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+<script>
+    function removeOrderProduct(orderId) {
+        $.ajax({
+            url: '/removeOrderProduct',
+            orderId: orderId,
+            method: 'post',
+            success: (response) => {
+                if (response.removeProd) {
+                    alert('Product removed from cart')
+                    location.reload()
+                }
+                else {
+                    alert(' Error in removing product from cart')
+                }
+            }
+        })
+    }
+</script>

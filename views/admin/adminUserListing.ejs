@@ -1,0 +1,122 @@
+<div class="container-scroller col-lg-12">
+  <div class="container-fluid page-body-wrapper col-lg-10 ">
+    <div class="container mb-2 ">
+      <div class="main-panel">
+        <h6> List of users </h6>
+        <div>
+          <input type="text" id="myInput" onkeyup="searchTable()" placeholder="Search by name...">
+        </div>
+        <table class="table table-hover table-bordered" id="myTable">
+          <thead>
+            <tr>
+              <!-- <th scope="col">#</th> -->
+              <th scope="col" style="text-align: center;vertical-align: middle;">Name</th>
+              <th scope="col" style="text-align: center;vertical-align: middle;">Email</th>
+              <th scope="col" style="text-align: center;vertical-align: middle;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (userlist){ for (let i=0; i < userlist.length; i++) { %>
+              <tr onclick='location.href="/admin/viewUser?id=<%= userlist[i]._id %>"'>
+                <td style="text-align: center;vertical-align: middle;">
+                  <%= userlist[i].name%>
+                </td>
+                <td style="text-align: center;vertical-align: middle;">
+                  <%= userlist[i].email%>
+                </td>
+                <td style="text-align: center;vertical-align: middle;">
+                  <% if (userlist[i].blocked){%>
+                    <a type="button" href="/admin/unblock?id=<%= userlist[i]._id %>"
+                      onclick=" return confirm('Are you sure you want to UNBLOCK this user ????')"
+                      class="btn btn-danger btn-sm btn-icon-text btn-icon-prepend">
+                      Click to Unblock
+                    </a>
+                    <% }else{ %>
+                      <a type="button" href="/admin/block?id=<%= userlist[i]._id %>"
+                        onclick=" return confirm('Are you sure you want to BLOCK this user ????')"
+                        class="btn btn-success btn-sm btn-icon-text  btn-icon-prepend">
+                        Click to Block
+                      </a>
+                      <% } %>
+                </td>
+              </tr>
+              <% } } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  function searchTable() {
+    let input, filter, table, tr, td
+    input = document.getElementById("myInput").value.toLowerCase();
+
+    filter = document.getElementById("myInput").value.toUpperCase()
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (var i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        let txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+
+    }
+  }
+
+  function funUser(userId) {
+    console.log('hy');
+    $.ajax({
+      url: "/admin/viewUser?id="+userId,
+      method: 'get',
+    })
+
+  }
+</script>
+<!-- <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  #myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+  }
+
+  #myTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+  }
+
+  #myTable th,
+  #myTable td {
+    text-align: left;
+    padding: 12px;
+  }
+
+  #myTable tr {
+    border-bottom: 1px solid #ddd;
+  }
+
+  #myTable tr.header,
+  #myTable tr:hover {
+    background-color: #f1f1f1;
+  }
+</style> -->

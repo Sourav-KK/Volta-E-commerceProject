@@ -1,0 +1,143 @@
+<div style="overflow-x:auto;">
+  <div class="container-fluid ">
+    <div class="container mt-4 mb-2" style="text-align: center;vertical-align: middle;">
+      <div class="col-lg-12">
+        <h3>Orders placed by different users
+      </div>
+      </h3>
+      <div class="col-lg-12" >
+        <input type="search" id="searchBar" onkeyup="search()" placeholder="Search by OrderId or Name" 
+          style="border-radius: 10px; border-color: #4B49AC;width: 70%;text-align:center;">
+      </div>
+    </div>
+    <table class="table table-hover table-bordered" id="myTable">
+      <thead>
+        <tr>
+          <th scope="col" style="text-align: center;vertical-align: middle;">No.</th>
+          <th scope="col" style="text-align: center;vertical-align: middle;">Order Date</th>
+          <th scope="col" style="text-align: center;vertical-align: middle;">Order id </th>
+          <th scope="col" style="text-align: center;vertical-align: middle;">Address </th>
+          <th scope="col" style="text-align: center;vertical-align: middle;">Amount & Payment </th>
+          <th scope="col" style="text-align: center;vertical-align: middle;">Order status</th>
+          <th scope="col" style="text-align: center;vertical-align: middle;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%if(orders){ for (let i=0; i < orders.length; i++) {%>
+          <tr>
+            <td style="text-align: center;vertical-align: middle;">
+              <%=i+1%>
+            </td>
+
+            <td style="text-align: center;vertical-align: middle;">
+              <%=orders[i].date.toDateString()%>
+            </td>
+
+            <td style="text-align: center;vertical-align: middle;">
+              <%=orders[i]._id%>
+            </td>
+
+            <td style="text-align: center;vertical-align: middle;">
+              <p>TO : <%=orders[i].deliveryDetails.name%>,</p>
+              <P>ADDRESS : <%=orders[i].deliveryDetails.address%>,<%=orders[i].deliveryDetails.state%>,
+                    <%=orders[i].deliveryDetails.country%>
+              </P>
+              <P>PINCODE : <%=orders[i].deliveryDetails.pincode%>
+              </P>
+              <p>EMAIL : <%=orders[i].deliveryDetails.email%>
+              </p>
+              <P>User ID : <%=orders[i].userId%>
+              </P>
+            </td>
+
+            <td style="text-align: center;vertical-align: middle;">
+              <P>TOTAL: ₹ <%=orders[i].deliveryDetails.total%>
+              </P>
+              <P>METHOD : <%=orders[i].deliveryDetails.paymentMethod%>
+              </P>
+            </td>
+
+            <td style="text-align: center;vertical-align: middle;">
+              <% if (orders[i]?.approval){%>
+                <% if(orders[i]?.orderStatus==0) {%>
+                  <a type="button" href="/admin/orderStatus?id=<%=orders[i]._id %>" title=" Click to confirm "
+                    onclick="return confirm('Are you sure you this order is ready to be shipped ????')"
+                    class="btn btn-primary btn-sm btn-icon-text btn-icon-prepend">
+                    <p style="color:darkblue;"> Processing</p>
+                  </a>
+
+                  <%}else if (orders[i]?.orderStatus==1){%>
+                    <a type="button" href="/admin/orderStatus?id=<%=orders[i]._id %>"
+                      title=" Click to confirm Delivered"
+                      onclick="return confirm('Are you sure you this order is ready to be Delivered ????')"
+                      class="btn btn-primary btn-sm btn-icon-text btn-icon-prepend">
+                      <p style="color: limegreen;">Shipped</p>
+                    </a>
+
+                    <%}else if (orders[i]?.orderStatus==2){%>
+                      <!-- <a type="button" href="/admin/orderStatus?id=<%=orders[i]._id %>" 
+                  title=" Click to confirm Delivered"
+                  onclick="return confirm('Are you sure you this order is Delivered ????')"
+                  class="btn btn-primary btn-sm btn-icon-text btn-icon-prepend"> -->
+                      <p style="color: limegreen;">Delivered</p>
+                      <!-- </a> -->
+
+                      <%} else if (orders[i]?.orderStatus==3){%>
+                        <p style="color: violet;">Cancelled</p>
+                        <%}%>
+                          <%} else {%>
+                            <p> the order is being verified</p>
+                            <%} %>
+            </td>
+
+            <td style="text-align: center;vertical-align: middle;">
+              <% if(orders[i].approval) {%>
+                <h4>Order is approved</h4>
+                <a type="button" href="/admin/cancel?id=<%=orders[i]._id %>" title=" Click to cancel order"
+                  onclick="return confirm('Are you sure you want to cancel this user ????')"
+                  class="   btn btn-success btn-sm btn-icon-text btn-icon-prepend">
+                  Cancel
+                </a>
+
+                <%} else{%>
+                  <h4>Order is cancelled</h4>
+                  <a type="button" href="/admin/approve?id=<%=orders[i]._id %>" title=" Click to approve order"
+                    onclick="return confirm('Are you sure you want to approve this order ????')"
+                    class="btn btn-danger btn-sm btn-icon-text  btn-icon-prepend ">
+                    Approve
+                  </a>
+                  <%} %>
+            </td>
+          </tr>
+          <%}} %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+  function search() {
+    let input, filter, table, tr, td, to, i, txtValue, date
+    input = document.getElementById("searchBar");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+      date = tr[i].getElementsByTagName("td")[1];
+      td = tr[i].getElementsByTagName("td")[2];
+      to = tr[i].getElementsByTagName("td")[3];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        txtVal = to.textContent || to.innerText;
+        dateVal = date.textContent || date.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue.toLowerCase().indexOf(filter) > -1 || txtVal.toUpperCase().indexOf(filter) > -1 || txtVal.toLowerCase().indexOf(filter) > -1 || dateVal.toUpperCase().indexOf(filter) > -1 || dateVal.toLowerCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>

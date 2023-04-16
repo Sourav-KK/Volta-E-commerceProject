@@ -1,0 +1,56 @@
+<div class="container-fluid ">
+  <div class="container mt-4 mb-2">
+    <a type="button" href="/admin/addcategories" class="btn btn-success btn-sm">Add new category </a> 
+    <span> <input type="search" id="input" placeholder="Search by category" onkeyup="search()"></span>
+  </div>
+  <table class="table table-hover table-bordered" id="myTable">
+    <thead>
+      <tr>
+        <th scope="col" style="text-align: center;vertical-align: middle;">No.</th>
+        <th scope="col" style="text-align: center;vertical-align: middle;">Categories</th>
+        <th scope="col" style="text-align: center;vertical-align: middle;">Edit / Delete </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (cat) { for (let i=0; i < cat.length; i++) {%>
+        <tr>
+          <td style="text-align: center;vertical-align: middle;">
+            <%=[i+1] %>
+          </td>
+          <td style="text-align: center;vertical-align: middle;">
+            <%=cat[i].category %>
+          </td>
+          <td style="text-align: center;vertical-align: middle;">
+            <% if(cat[i].category){%>
+              <a type="button" href="/admin/editcategory?id=<%= cat[i]._id %>" class="btn btn-primary">Edit </a>
+              <a type="button" href="/admin/deletecategory?id=<%= cat[i]._id %>" class="btn btn-danger"
+                onclick=" return confirm('Are you sure you want to delete this category ????')">Delete </a>
+              <%} %>
+          </td>
+        </tr>
+        <%}} %>
+    </tbody>
+  </table>
+</div>
+<script>
+  function search() {
+    let input, tr, filter, table
+    input = document.getElementById('input').value.toLowerCase()
+    tr = document.getElementsByTagName('tr')
+    table = document.getElementById("myTable")
+    filter = document.getElementById('input').value.toUpperCase()
+
+    for (let i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        let txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }      
+    }
+
+  }
+</script>

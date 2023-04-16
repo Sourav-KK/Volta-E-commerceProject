@@ -1,0 +1,92 @@
+<div class="container-fluid ">
+
+    <div class="container mt-4 mb-2">
+        <div class="mt-5 border border-primary">
+            <div class="col-md-12 ">
+                <h2 class="text-center text-primary mt-2">Edit Product</h2>
+                <form action="/admin/editproduct?id=<%=product._id%>" method="post">
+                    <label for="">Name</label>
+                    <input type="text" name="name" class="form-control" value="<%=product.name  %>" required>
+
+                    <label for="">Price</label>
+                    <input type="number" name="marketPrice" class="form-control" value="<%=product.marketPrice  %>"
+                        required>
+
+                    <label for="">Stock</label>
+                    <input type="tel" name="stock" class="form-control" value="<%=product.stock  %>" required>
+
+                    <label for="">Description</label>
+                    <input type="text" name="description" class="form-control" value="<%=product.description %>"
+                        required>
+
+                    <label>Category </label>
+                    <select class="form-select form-select-sm" name="category" aria-label=".form-select-sm example">
+                        <option selected>
+                            <%=product.category %>
+                        </option>
+                        <% if (cat) { for (let i=0; i < cat.length; i++) {%>
+                            <option name="category">
+                                <%=cat[i].category %>
+                            </option>
+                            <%}} %>
+                    </select>
+
+                    <div class="form-group col-md-5">
+                        <img id="imgView2" src="/productImages/<%= product._id %>0.jpg" alt=""
+                            style="width: 75px; height: 75px;">
+                        <label for="image">Image 1</label>
+                        <input type="file" name="image" class="form-control" onchange="viewImage2(event)">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <img id="imgView2" src="/productImages/<%= product._id %>1.jpg" alt=""
+                            style="width: 75px; height: 75px;">
+                        <label for="image">Image 2</label>
+                        <input type="file" name="image" class="form-control" onchange="viewImage2(event)">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <img id="imgView2" src="/productImages/<%= product._id %>2.jpg" alt=""
+                            style="width: 75px; height: 75px;">
+                        <label for="image">Image 3</label>
+                        <input type="file" name="image" class="form-control" onchange="viewImage2(event)">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <img id="imgView2" src="/productImages/<%= product._id %>3.jpg" alt=""
+                            style="width: 75px; height: 75px;">
+                        <label for="image">Image 4</label>
+                        <input type="file" name="image" class="form-control" onchange="viewImage2(event)">
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <a href="/admin/editImage?id=<%= product._id %>">Choose cover image</a>
+                    </div>
+
+                    <span>
+                        <button class="btn btn-primary mt-4 mb-4"><a href="admin/productmanagement"></a>Go back</button>
+                        <button type="submit" class="btn btn-success ml-5 mt-4 mb-4">SUBMIT</button>
+                    </span>
+                    <!-- <a href="" type="button">Go Back</a> -->
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function viewImage1(event) {
+        document.getElementById('imgView1').src = URL.createObjectURL(event.target.files[0])
+        // console.log(event)
+    }
+
+    function viewImage2(event) {
+        document.getElementById('imgView2').src = URL.createObjectURL(event.target.files[0])
+    }
+
+    function viewImage3(event) {
+        document.getElementById('imgView3').src = URL.createObjectURL(event.target.files[0])
+    }
+
+    function viewImage4(event) {
+        document.getElementById('imgView4').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>
