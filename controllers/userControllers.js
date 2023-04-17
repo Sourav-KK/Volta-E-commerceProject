@@ -45,9 +45,11 @@ const getLandingPage = async function (req, res, next) {
         let coursalBanner1 = await bannerHelpers.allBanners()
         let products = await productHelpers.getAllProducts()
         let cartCount =  await userHelpers.getCartCount(req.session.user._id)
-    res.render('user/userLandingPage', { nav: true, footer,use,"name": req.session.user.name, coursalBanner1, products,cartCount });
-}else{
-    res.render('user/userLandingPage',{ nav: true, footer})
+        res.render('user/userLandingPage', { nav: true, footer,use,"name": req.session.user.name, coursalBanner1, products,cartCount });
+    }else{
+        let products = await productHelpers.getAllProducts()
+        let coursalBanner1 = await bannerHelpers.allBanners()
+        res.render('user/userLandingPage',{ nav: true, footer, products, coursalBanner1})
 }
 }
 
