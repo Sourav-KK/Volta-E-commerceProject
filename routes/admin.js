@@ -121,9 +121,4 @@ router.route('/edit-banner').get(verifyAdminLogin, admincontroller.editBanner)
 router.route('/offers').get(verifyAdminLogin, offers)
                        .post(verifyAdminLogin, addOffers)
 
-
-
-
-
-
 module.exports = router;

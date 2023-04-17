@@ -46,9 +46,7 @@ app.use(
 
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
-app.all('*', (req,res)=>{
-    res.redirect('/')
-})
+
 
 let store = multer.diskStorage({
   destination: function (req, file, cb) {

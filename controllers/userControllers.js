@@ -201,6 +201,7 @@ const getCheckout = async (req, res) => {
     let mobile = req.session.user.mobile        
     let data = await userHelpers.getCart(user)
     let address = await accountHelpers.getAddresses(user)
+    console.log(address," asdj j hj");
     let cartCount =  await userHelpers.getCartCount(req.session.user._id)
     let total = 0
     if (data.length > 0) {

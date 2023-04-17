@@ -87,8 +87,5 @@ router.post('/removeOrderProduct', postRemoveOrderProduct)
 router.get('/orderdetails', verifyUserLogin, getOrderDetails)
 
 router.post('/returnItem', verifyUserLogin, returnItem)
-// <!--  -->
-
-// router.get('/ ',auth.verifyUserLogin,)
 
 module.exports = router;

@@ -106,11 +106,27 @@
                                     <input type="tel"  name="couponDiscount" value="tony()" hidden>
                                     <!-- <input type="tel"  name="orderStatus" value="0" hidden> -->
                                     
+                                    <script>function openList1() {
+                                        let list = document.getElementById("list1");
+                                    
+                                        if (list.style.display == "none"){
+                                            list.style.display = "block";
+                                        }else{
+                                            list.style.display = "none";
+                                        }
+                                    }</script>
                                     <div class="row"> <p  onclick = "openList1()">Click to choose address</p>
                                         <div class="col-lg-9">
                                             <ol id = "list1" style="display: none;">
-                                                <% if (address?.length > 0) { for (let i = 0; i < address?.address?.length; i++) { %>
-                                                    <li><a href = "/checkout?id=<%=address?.address[i]?._id%>"><span><%=i+1%>.</span><%=address?.address[i]?.streetAddress%>, <%=address?.address[i]?.state%>, <%=address?.address[i]?.country%>, <%=address?.address[i]?.pincode%>,</a></li>
+                                                <% if (address) { for (let i = 0; i < address?.address?.length; i++) { %>
+                                                    <li>
+                                                        <a href = "/checkout?id=<%=address?.address[i]?._id%>">
+                                                            <span>
+                                                                <%=i+1%>.
+                                                            </span>
+                                                            <%=address?.address[i]?.streetAddress%>, <%=address?.address[i]?.state%>, <%=address?.address[i]?.country%>, <%=address?.address[i]?.pincode%>,
+                                                        </a>
+                                                    </li>
 
                                                 <%} }else{ %>
                                                     <li><p>No address to display. You can add new address in<a href="/account">acount</a>. Or we will save the address once you place the order</p></li>
@@ -472,20 +488,10 @@
             }
         }).render('#paypal');
     }
-function tony() {
-    
-}
 
 
-function openList1() {
-    let list = document.getElementById("list1");
 
-    if (list.style.display == "none"){
-        list.style.display = "block";
-    }else{
-        list.style.display = "none";
-    }
-}
+
 
 function changeAddress(addressId) {
     $.ajax({
