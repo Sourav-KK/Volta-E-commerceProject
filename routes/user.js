@@ -63,11 +63,11 @@ router.post('/removeCartProduct', verifyUserLogin, postRemoveCartProduct)
 
 router.get('/checkout', verifyUserLogin, getCheckout)
 
-router.post('/checkout', postCheckout)
+router.post('/checkout',verifyUserLogin, postCheckout)
 
-router.post('/couponCheck', checkCoupon)
+router.post('/couponCheck',verifyUserLogin, checkCoupon)
 
-router.get('/coupon-validator', couponValidator)
+router.get('/coupon-validator',verifyUserLogin, couponValidator)
 
 router.get('/success', verifyUserLogin, getSuccess)
 

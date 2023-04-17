@@ -249,6 +249,8 @@ const couponValidator = async (req,res)=>{
 
 
 const postCheckout = async (req, res) => {
+    console.log("sdfjhj j ");
+    console.log("post checkout details 12122");
     let products = await userHelpers.getCartProductList(req.session.user)
 
     let totalPrice = await userHelpers.getTotalAmnt(req.session.user._id)

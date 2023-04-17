@@ -1,9 +1,31 @@
+<script>
+     function openList1() {
+        let list = document.getElementById("list1");
+
+        if (list.style.display == "none") {
+            list.style.display = "block";
+        } else {
+            list.style.display = "none";
+        }
+    }
+    function display(x) {
+        document.getElementById('paypal').style.display = x;
+        if (x == 'none') {
+            document.getElementById('placeOrder').style.display = '';
+        } else if (x == 'yes') {
+            document.getElementById('placeOrder').style.display = '';
+        }
+        else {
+            document.getElementById('placeOrder').style.display = '';
+        }
+    }
+</script>
 <div class="page-wrapper">
     <main class="main">
         <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
-                <div class="container">
-                    <h1 class="page-title">Checkout</h1>
-                </div><!-- End .container -->
+            <div class="container">
+                <h1 class="page-title">Checkout</h1>
+            </div><!-- End .container -->
         </div><!-- End .page-header -->
 
         <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -11,7 +33,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page"> <a href="/cart">My Cart</a></li>
-                     <li class="breadcrumb-item active" aria-current="page"> <a href="/checkout">Checkout</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> <a href="/checkout">Checkout</a></li>
                 </ol>
             </div><!-- End .container -->
         </nav><!-- End .breadcrumb-nav -->
@@ -32,14 +54,14 @@
                                 </div>
                             </form>
                         </div> -->
-                        <form action="#" id="checkout-formm">
-                            <div class="row">
+                    <form action="#" id="checkout-formm">
+                        <div class="row">
 
-                                <% if (oneAddress) { %>  
-                                
+                            <% if (oneAddress) { %>
+
                                 <div class="col-lg-9">
                                     <h2 class="checkout-title">Billing Details</h2>
-                                    
+
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>First Name *</label>
@@ -52,16 +74,12 @@
                                         </div> -->
                                     </div><!-- End row-->
 
-                                    <!-- <label>Company Name (Optional)</label>
-                                    <input type="text" class="form-control"> -->
-
-                                    <!-- <label>Country *</label>
-                                    <input type="text" name="country" class="form-control" required> -->
-
-                                    <label>Street address *<span class="font-weight-light"> (Note : The address entered will
+                                    <label>Street address *<span class="font-weight-light"> (Note : The address entered
+                                            will
                                             be saved for future use) </span> </label>
                                     <input type="text" name="address" class="form-control"
-                                        placeholder="House number and Street name" value="<%=oneAddress?.address[0]?.streetAddress%>" required>
+                                        placeholder="House number and Street name"
+                                        value="<%=oneAddress?.address[0]?.streetAddress%>" required>
                                     <!-- <input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..."
                                         required> -->
 
@@ -69,7 +87,10 @@
                                         <div class="col-sm-6">
                                             <label>State *</label>
                                             <select class="form-control" name="state">
-                                                <option hidden disabled selected value="<%=oneAddress?.address[0]?.streetAddress%>"> Select-- <%=oneAddress?.address[0]?.state%></option>
+                                                <option hidden disabled selected
+                                                    value="<%=oneAddress?.address[0]?.streetAddress%>"> Select--
+                                                    <%=oneAddress?.address[0]?.state%>
+                                                </option>
                                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                                 <option value="Karnataka">Karnataka</option>
                                                 <option value="Kerala">Kerala</option>
@@ -81,15 +102,16 @@
 
                                         <div class="col-sm-6">
                                             <label>County *</label>
-                                            <input type="text" name="country" class="form-control" value="India" readonly
-                                                required>
+                                            <input type="text" name="country" class="form-control" value="India"
+                                                readonly required>
                                         </div>
                                     </div><!-- End row -->
 
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Pincode *</label>
-                                            <input type="tel" name="pincode" class="form-control" value="<%=oneAddress?.address[0]?.pincode%>"required>
+                                            <input type="tel" name="pincode" class="form-control"
+                                                value="<%=oneAddress?.address[0]?.pincode%>" required>
                                         </div><!-- End .col-sm-6 -->
 
                                         <div class="col-sm-6">
@@ -103,34 +125,33 @@
                                     <input type="email" name="email" class="form-control" value="<%=email %> " required>
                                     <input type="text" name="userId" value="<%=user%>" hidden>
                                     <input type="text" name="approval" value="true" hidden>
-                                    <input type="tel"  name="couponDiscount" value="tony()" hidden>
+                                    <input type="tel" name="couponDiscount" value="tony()" hidden>
                                     <!-- <input type="tel"  name="orderStatus" value="0" hidden> -->
-                                    
-                                    <script>function openList1() {
-                                        let list = document.getElementById("list1");
-                                    
-                                        if (list.style.display == "none"){
-                                            list.style.display = "block";
-                                        }else{
-                                            list.style.display = "none";
-                                        }
-                                    }</script>
-                                    <div class="row"> <p  onclick = "openList1()">Click to choose address</p>
+
+                                    <div class="row">
+                                        <p onclick="openList1()">Click to choose address</p>
                                         <div class="col-lg-9">
-                                            <ol id = "list1" style="display: none;">
-                                                <% if (address) { for (let i = 0; i < address?.address?.length; i++) { %>
+                                            <ol id="list1" style="display: none;">
+                                                <% if (address) { for (let i=0; i < address?.address?.length; i++) { %>
                                                     <li>
-                                                        <a href = "/checkout?id=<%=address?.address[i]?._id%>">
+                                                        <a href="/checkout?id=<%=address?.address[i]?._id%>">
                                                             <span>
                                                                 <%=i+1%>.
                                                             </span>
-                                                            <%=address?.address[i]?.streetAddress%>, <%=address?.address[i]?.state%>, <%=address?.address[i]?.country%>, <%=address?.address[i]?.pincode%>,
+                                                            <%=address?.address[i]?.streetAddress%>,
+                                                                <%=address?.address[i]?.state%>,
+                                                                    <%=address?.address[i]?.country%>,
+                                                                        <%=address?.address[i]?.pincode%>,
                                                         </a>
                                                     </li>
 
-                                                <%} }else{ %>
-                                                    <li><p>No address to display. You can add new address in<a href="/account">acount</a>. Or we will save the address once you place the order</p></li>
-                                                <% }%> %>
+                                                    <%} }else{ %>
+                                                        <li>
+                                                            <p>No address to display. You can add new address in<a
+                                                                    href="/account">acount</a>. Or we will save the
+                                                                address once you place the order</p>
+                                                        </li>
+                                                        <% }%> %>
                                             </ol>
                                         </div>
                                     </div>
@@ -152,64 +173,73 @@
                                         placeholder="Notes about your order, e.g. special notes for delivery"></textarea> -->
                                 </div><!-- End .col-lg-9 -->
                                 <%} %>
-                                <aside class="col-lg-3">
-                                    <div class="summary">
-                                        <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+                                    <aside class="col-lg-3">
+                                        <div class="summary">
+                                            <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
 
-                                        <table class="table table-summary">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Total</th>
-                                                </tr>
-                                            </thead>
+                                            <table class="table table-summary">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
 
-                                            <tbody>
-                                                <!-- <tr>
+                                                <tbody>
+                                                    <!-- <tr>
                                                     <td><a href="#">Beige knitted elastic runner shoes</a></td>
                                                     <td>$84.00</td>
                                                 </tr> -->
 
-                                                <!-- <tr>
+                                                    <!-- <tr>
                                                     <td><a href="#">Blue utility pinafore denimdress</a></td>
                                                     <td>$76,00</td>
                                                 </tr> -->
-                                                <tr class="summary-subtotal">
-                                                    <td>Subtotal:</td>
-                                                    <td>₹<%=total %></td>
-                                                </tr><!-- End .summary-subtotal -->
+                                                    <tr class="summary-subtotal">
+                                                        <td>Subtotal:</td>
+                                                        <td>₹<%=total %>
+                                                        </td>
+                                                    </tr><!-- End .summary-subtotal -->
 
-                                                <tr>
-                                                    <td>
-                                                        <div class="checkout-discount">
-                                                            <form action="#">
-                                                                <div class="cart-discount">
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="form-control " autocomplete="off" id="code" placeholder="coupon code">
-                                                                        <div class="input-group-append">
-                                                                            <button class="btn btn-sm btn-outline-primary" style="width:3em; height: 3em;" type="button" onclick="couponValidator(this,'<%=total%>')"><i class="icon-long-arrow-right"></i></button>
-                                                                        </div><!-- .End .input-group-append -->
-                                                                    </div><!-- End .input-group -->
-                                                                </div><!-- End .cart-discount -->
-                                                            </form>
-                                                            <p id="couponErr"></p>
-                                                        </div><!-- End .checkout-discount -->
-                                                    </td>
-                                                </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="checkout-discount">
+                                                                <form action="#">
+                                                                    <div class="cart-discount">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control "
+                                                                                autocomplete="off" id="code"
+                                                                                placeholder="coupon code">
+                                                                            <div class="input-group-append">
+                                                                                <button
+                                                                                    class="btn btn-sm btn-outline-primary"
+                                                                                    style="width:3em; height: 3em;"
+                                                                                    type="button"
+                                                                                    onclick="couponValidator(this,'<%=total%>')"><i
+                                                                                        class="icon-long-arrow-right"></i></button>
+                                                                            </div><!-- .End .input-group-append -->
+                                                                        </div><!-- End .input-group -->
+                                                                    </div><!-- End .cart-discount -->
+                                                                </form>
+                                                                <p id="couponErr"></p>
+                                                            </div><!-- End .checkout-discount -->
+                                                        </td>
+                                                    </tr>
 
-                                                <tr>
-                                                    <td>Shipping:</td>
-                                                    <td>Free shipping</td>
-                                                </tr>
-                                                <tr class="summary-total">
-                                                    <td>Total:</td>
-                                                    <td id="couponTotal">₹ <%=total %></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                                    <tr>
+                                                        <td>Shipping:</td>
+                                                        <td>Free shipping</td>
+                                                    </tr>
+                                                    <tr class="summary-total">
+                                                        <td>Total:</td>
+                                                        <td id="couponTotal">₹ <%=total %>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-                                        <div class="accordion-summary" id="accordion-payment">
-                                            <!-- <div class="card">
+                                            <div class="accordion-summary" id="accordion-payment">
+                                                <!-- <div class="card">
                                                 <div class="card-header" id="heading-1">
                                                     <h2 class="card-title">
                                                         <a role="button" data-toggle="collapse" href="#collapse-1"
@@ -228,7 +258,7 @@
                                                 </div>
                                             </div> -->
 
-                                            <!-- <div class="card">
+                                                <!-- <div class="card">
                                                 <div class="card-header" id="heading-2">
                                                     <h2 class="card-title">
                                                         <a class="collapsed" role="button" data-toggle="collapse"
@@ -247,60 +277,45 @@
                                                 </div>
                                             </div> -->
 
-                                            <div class="card">
-                                                <div class="card-header" id="heading-3">
-                                                    <h2 class="card-title">
-                                                        <label class="radio-inline">
-                                                            <script>
-                                                                    function display(x) {
-                                                                        document.getElementById('paypal').style.display = x;
-                                                                        if (x == 'none') {
-                                                                            document.getElementById('placeOrder').style.display = '';
-                                                                        }else if(x=='yes'){
-                                                                            document.getElementById('placeOrder').style.display = '';
-                                                                            
-                                                                        }
-                                                                        else {
-                                                                            // document.getElementById('checkout-formm').submit() ;
+                                                <div class="card">
+                                                    <div class="card-header" id="heading-3">
+                                                        <h2 class="card-title">
+                                                            <label class="radio-inline">
 
-                                                                            document.getElementById('placeOrder').style.display = '';
-                                                                        }
-                                                                    }
-                                                            </script>
-                                                            <input type="radio" name="paymentMethod" value="COD" required
-                                                                onclick="display('none')">COD
-                                                        </label>
-                                                        <!-- <a class="collapsed" role="button" name="paymentMethod" data-toggle="collapse"
+                                                                <input type="radio" name="paymentMethod" value="COD"
+                                                                    required onclick="display('none')">COD
+                                                            </label>
+                                                            <!-- <a class="collapsed" role="button" name="paymentMethod" data-toggle="collapse"
                                                             href="#collapse-3" aria-expanded="false"
                                                             aria-controls="collapse-3">
                                                             Cash on delivery
                                                         </a> -->
-                                                    </h2>
-                                                </div>
-                                                <!-- <div id="collapse-3" class="collapse" aria-labelledby="heading-3"
+                                                        </h2>
+                                                    </div>
+                                                    <!-- <div id="collapse-3" class="collapse" aria-labelledby="heading-3"
                                                     data-parent="#accordion-payment">
                                                     <div class="card-body">Quisque volutpat mattis eros. Lorem ipsum dolor
                                                         sit amet, consectetuer adipiscing elit. Donec odio.
                                                     </div>
                                                 </div> -->
-                                            </div><!-- End card-->
+                                                </div><!-- End card-->
 
-                                            <div class="card">
-                                                <div class="card-header" id="heading-4">
-                                                    <h2 class="card-title">
-                                                        <label class="radio-inline mt-2">
-                                                            <input type="radio" name="paymentMethod" value="PayPal"
-                                                                onclick="display('')"> PayPal
-                                                        </label>
-                                                        <div id="paypal" style="display: none;"></div>
-                                                        <!-- <a class="collapsed" role="button" name="paymentMethod" data-toggle="collapse"
+                                                <div class="card">
+                                                    <div class="card-header" id="heading-4">
+                                                        <h2 class="card-title">
+                                                            <label class="radio-inline mt-2">
+                                                                <input type="radio" name="paymentMethod" value="PayPal"
+                                                                    onclick="display('')"> PayPal
+                                                            </label>
+                                                            <div id="paypal" style="display: none;"></div>
+                                                            <!-- <a class="collapsed" role="button" name="paymentMethod" data-toggle="collapse"
                                                             href="#collapse-4" aria-expanded="false"
                                                             aria-controls="collapse-4">
                                                             PayPal 
                                                         </a> -->
-                                                    </h2>
-                                                </div>
-                                                <!-- <div id="collapse-4" class="collapse" aria-labelledby="heading-4"
+                                                        </h2>
+                                                    </div>
+                                                    <!-- <div id="collapse-4" class="collapse" aria-labelledby="heading-4"
                                                     data-parent="#accordion-payment">
                                                     <div class="card-body">
                                                         Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non,
@@ -308,35 +323,23 @@
                                                         facilisis fermentum.
                                                     </div>
                                                 </div> -->
-                                            </div><!-- End card-->
+                                                </div><!-- End card-->
 
-                                            <!-- RAzorpay -->
-                                            <div class="card">
-                                                <div class="card-header" id="heading-5">
-                                                    <h2 class="card-title">
-                                                        <label class="radio-inline mt-2">
-                                                            <input type="radio" name="paymentMethod" value="razorpay"
-                                                                onclick="display('yes'), paypalPayment"> razorpay
-                                                        </label>
-                                                        <div id="razorpay" style="display: none;"></div>
-                                                        <!-- <a class="collapsed" role="button" name="paymentMethod" data-toggle="collapse"
-                                                            href="#collapse-4" aria-expanded="false"
-                                                            aria-controls="collapse-4">
-                                                            PayPal 
-                                                        </a> -->
-                                                    </h2>
-                                                </div>
-                                                <!-- <div id="collapse-4" class="collapse" aria-labelledby="heading-4"
-                                                    data-parent="#accordion-payment">
-                                                    <div class="card-body">
-                                                        Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non,
-                                                        semper suscipit, posuere a, pede. Donec nec justo eget felis
-                                                        facilisis fermentum.
+                                                <!-- RAzorpay -->
+                                                <div class="card">
+                                                    <div class="card-header" id="heading-5">
+                                                        <h2 class="card-title">
+                                                            <label class="radio-inline mt-2">
+                                                                <input type="radio" name="paymentMethod"
+                                                                    value="razorpay"
+                                                                    onclick="display('yes'), paypalPayment"> razorpay
+                                                            </label>
+                                                            <div id="razorpay" style="display: none;"></div>
+                                                        </h2>
                                                     </div>
-                                                </div> -->
-                                            </div><!--end RAzor pay card  -->
-                                            
-                                            <!-- <div class="card">
+                                                </div><!--end RAzor pay card  -->
+
+                                                <!-- <div class="card">
                                                 <div class="card-header" id="heading-5">
                                                     <h2 class="card-title">
                                                         <a class="collapsed" role="button" data-toggle="collapse"
@@ -354,21 +357,21 @@
                                                 </div>
                                             </div> -->
 
-                                            <br>
-                                            <img src="assets/images/payments-summary.png" alt="payments cards">
-                                        </div><!-- End .accordion -->
-                                        
-                                    </div><!-- End summary -->
+                                                <br>
+                                                <img src="assets/images/payments-summary.png" alt="payments cards">
+                                            </div><!-- End .accordion -->
 
-                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block"
+                                        </div><!-- End summary -->
+
+                                        <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block"
                                             id="placeOrder" style="display: none;">
-                                                Place Order
-                                        <!-- <span class="btn-hover-text">Proceed to Checkout</span> -->
-                                    </button>
-                        
-                                </aside><!-- End .col-lg-3 -->
-                            </div><!-- End .row -->
-                        </form>
+                                            Place Order
+                                            <!-- <span class="btn-hover-text">Proceed to Checkout</span> -->
+                                        </button>
+
+                                    </aside><!-- End .col-lg-3 -->
+                        </div><!-- End .row -->
+                    </form>
                 </div><!-- End .container -->
             </div><!-- End .checkout -->
         </div><!-- End .page-content -->
@@ -395,10 +398,10 @@
             success: (response) => {
                 if (response.status) {
                     window.location.replace('/success')
-                }else if(response?.paypal == true){
+                } else if (response?.paypal == true) {
                     // alert('Order successfully placed')
                     paypalPayment(response?.total)
-                }else{
+                } else {
                     razorPay(response)
                 }
             }
@@ -411,13 +414,13 @@
         $.ajax({
             url: '/coupon-validator?code=' + code,
             method: 'get',
-            success: (response)=>{
+            success: (response) => {
                 if (response?.status === true) {
-                    couponErr?.style.color = '#19ff11'
-                    couponErr?.innerText = 'Coupon Applied Succesfully'
-                    console.log(`₹ ${total-response?.discount}`,"tototoot");
+                    couponErr.style.color = '#19ff11'
+                    couponErr.innerText = 'Coupon Applied Succesfully'
+                    console.log(`₹ ${total - response?.discount}`, "tototoot");
 
-                    couponTotal.innerText = `₹ ${total-response?.discountAmount}`
+                    couponTotal.innerText = `₹ ${total - response?.discountAmount}`
                 } else {
                     console.log('failed', response?.reason);
                     couponErr.style.color = '#ff0707'
@@ -436,13 +439,13 @@
                 if (response) {
                     alert('success coupon code')
                     location.reload('/checkout')
-                }else{
+                } else {
                     alert('invalid coupon code')
                 }
             }
         })
     })
-    function paypalPayment(total){
+    function paypalPayment(total) {
         paypal.Buttons({
             // Order is created on the server and the order id is returned
             createOrder: () => {
@@ -461,9 +464,9 @@
                         }]
                     }),
                 }).then(res => {
-                        if (res.ok) return res.json()
-                        return res.json().then(json => Promise.reject(json))
-                    }).then(({ id }) => { return id })
+                    if (res.ok) return res.json()
+                    return res.json().then(json => Promise.reject(json))
+                }).then(({ id }) => { return id })
                     .catch(e => {
                         console.log(e.error);
                     })
@@ -471,12 +474,12 @@
             // Finalize the transaction on the server after payer approval
             onApprove: (data, actions) => {
                 return actions.order.capture().then(() => {
-                    console.log("data in Paypal onApprove + checkout.ejs ",data);
+                    console.log("data in Paypal onApprove + checkout.ejs ", data);
                     $.ajax({
                         url: '/paypal-success',
                         method: 'post',
-                        success: (response) =>{
-                            if (response.status) {
+                        success: (response) => {
+                            if (response?.status) {
                                 window.location.replace('/success')
                             } else {
                                 alert('Something went wrong')
@@ -488,17 +491,13 @@
             }
         }).render('#paypal');
     }
-
-
-
-
-
-function changeAddress(addressId) {
-    $.ajax({
+   
+    function changeAddress(addressId) {
+        $.ajax({
             url: '/checkout?id=addressId',
             method: 'get',
-            success: (response)=>{
-                if (response.status === true) {
+            success: (response) => {
+                if (response?.status === true) {
                     window.location.reload()
                 } else {
                     alert('something went wrong')
@@ -506,5 +505,5 @@ function changeAddress(addressId) {
                 }
             }
         })
-}
+    }
 </script>
