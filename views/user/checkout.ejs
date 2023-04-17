@@ -109,7 +109,7 @@
                                     <div class="row"> <p  onclick = "openList1()">Click to choose address</p>
                                         <div class="col-lg-9">
                                             <ol id = "list1" style="display: none;">
-                                                <% if (address) { for (let i = 0; i < address?.address?.length; i++) { %>
+                                                <% if (address.lenght > 0) { for (let i = 0; i < address?.address?.length; i++) { %>
                                                     <li><a href = "/checkout?id=<%=address?.address[i]?._id%>"><span><%=i+1%>.</span><%=address?.address[i]?.streetAddress%>, <%=address?.address[i]?.state%>, <%=address?.address[i]?.country%>, <%=address?.address[i]?.pincode%>,</a></li>
                                                 <%} }else{ %>
                                                     <li><p>No address to display. You can add new address in<a href="/account">acount</a>. Or we will save the address once you place the order</p></li>
