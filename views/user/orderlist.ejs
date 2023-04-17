@@ -33,36 +33,36 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% if (locals.orders){for (let i=0; i <orders.length ; i++) {%>
+                            <% if (locals?.orders){for (let i=0; i <orders?.length ; i++) {%>
                                 <tr>
                                     <td class="No col-0" style="text-align: center;vertical-align: middle;">
                                         <%=i+1%>
                                     </td>
                                     <td class="date col-1" style="text-align: center;vertical-align: middle;">
-                                        <%=orders[i].date.toDateString()%>
+                                        <%=orders[i]?.date?.toDateString()%>
                                     </td>
                                     <!-- <td class="name" style="text-align: center;vertical-align: middle;"></td> -->
                                     <td class="address col-3" style="text-align: center;vertical-align: middle;">
-                                        <%=orders[i].deliveryDetails.name%>, <%=orders[i].deliveryDetails.address%>,
-                                                <%=orders[i].deliveryDetails.state%>,
-                                                    PINCODE: <%=orders[i].deliveryDetails.pincode%>
+                                        <%=orders[i]?.deliveryDetails?.name%>, <%=orders[i]?.deliveryDetails?.address%>,
+                                                <%=orders[i]?.deliveryDetails?.state%>,
+                                                    PINCODE: <%=orders[i]?.deliveryDetails?.pincode%>
                                     </td>
                                     <!-- <td class="pincode" style="text-align: center;vertical-align: middle;">
-                                    <%=orders[i].deliveryDetails.products%></td> -->
+                                    <%=orders[i]?.deliveryDetails?.products%></td> -->
 
                                     <td class="order col-1" style="text-align: center;vertical-align: middle;">
-                                        <a href="/orderdetails?id=<%=orders[i]._id %>">Order Details</a>
+                                        <a href="/orderdetails?id=<%=orders[i]?._id %>">Order Details</a>
                                     </td>
 
                                     <td class="total col-1" style="text-align: center;vertical-align: middle;">
-                                        ₹ <%=orders[i].deliveryDetails.total.toFixed(2)%> 
+                                        ₹ <%=orders[i]?.deliveryDetails?.total?.toFixed(2)%> 
                                             <%if(orders[i]?.paymentStatus==='Pending'){%>
                                                 <p style="color: red;"  title="Not paid">
-                                                    (<%=orders[i].deliveryDetails.paymentMethod%>)
+                                                    (<%=orders[i]?.deliveryDetails?.paymentMethod%>)
                                                 </p>
                                             <%}else{ %>
                                             <p  style="color: #A6C76C;"title="Paid">
-                                                (<%=orders[i].deliveryDetails.paymentMethod%>)
+                                                (<%=orders[i]?.deliveryDetails?.paymentMethod%>)
                                             </p>
                                             <% } %>
                                     </td>
@@ -81,7 +81,7 @@
 
                                     <td style="text-align: center;vertical-align: middle;">
                                         <% if(orders[i]?.orderStatus <2 ){%>
-                                            <a type="button" href="/cancelorder?id=<%= orders[i]._id %>"
+                                            <a type="button" href="/cancelorder?id=<%= orders[i]?._id %>"
                                                 onclick=" return confirm('Are you sure you want to cancel your order ????')"
                                                 class="btn btn-danger btn-sm btn-icon-text btn-icon-prepend">
                                                 Cancel Order
@@ -127,7 +127,7 @@
             orderId: orderId,
             method: 'post',
             success: (response) => {
-                if (response.removeProd) {
+                if (response?.removeProd) {
                     alert('Product removed from cart')
                     location.reload()
                 }

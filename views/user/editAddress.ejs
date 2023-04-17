@@ -20,13 +20,13 @@
                     <div class="row">
                         <div class="col-sm-6">
                           <label>Street Address *<span id="streetAddressError" class="text-danger"></span></label>
-                            <input type="text" class="form-control" name="streetAddress" id="streetAddress" value="<%=oneAdd.streetAddress%>">
+                            <input type="text" class="form-control" name="streetAddress" id="streetAddress" value="<%=oneAdd?.streetAddress%>">
                         </div>
                       
                         <div class="col-sm-6">
                             <label >State *<span id="stateError" class="text-danger"></span></label>
                             <select class="form-control" name="state" id="state" required>
-                              <option selected value="<%=oneAdd.state%>"> <%=oneAdd.state%></option>
+                              <option selected value="<%=oneAdd?.state%>"> <%=oneAdd?.state%></option>
                               <option value="Andhra Pradesh">Andhra Pradesh</option>
                               <option value="Karnataka">Karnataka</option>
                               <option value="Kerala">Kerala</option>
@@ -42,8 +42,8 @@
 
                         <div class="col-sm-6">
                             <label>Pincode *<span id="pincodeError" class="text-danger"></span></label>
-                                <input type="tel" class="form-control" name="pincode" id="pincode" value="<%=oneAdd.pincode %>">
-                                <input type="text" name="addId" value="<%=oneAdd._id %>" hidden>
+                                <input type="tel" class="form-control" name="pincode" id="pincode" value="<%=oneAdd?.pincode %>">
+                                <input type="text" name="addId" value="<%=oneAdd?._id %>" hidden>
                         </div>
 
                         <div class="col-sm-6">
@@ -124,11 +124,11 @@
           data: $('#editAddress-formm').serialize(),//serialize is used to get every data in the form
           method: 'post',
           success: (response) => {
-            if (response.status) {
+            if (response?.status) {
               alert('successfully updated')
               window.location.href = "/account"
             } else {
-              alert( response.message,'')
+              alert( response?.message,'')
               window.location.href = "/account"
             }
           }

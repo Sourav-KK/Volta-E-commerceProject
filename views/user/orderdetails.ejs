@@ -11,7 +11,7 @@
                 <div class="container-fluid">
                     <div class="row">
 
-                        <% for (let i=0; i < product.length; i++) { %>
+                        <% for (let i=0; i < product?.length; i++) { %>
                             <div class="container-fluid">
                                 <table class="ui striped table">
                                     <thead>
@@ -23,7 +23,7 @@
                                     <tbody>
                                         <tr>
                                             <td style="height: 50rem;width: 100px; ">
-                                                <img src=/productImages/<%=product[i].products._id %>0.jpg
+                                                <img src=/productImages/<%=product[i]?.products?._id %>0.jpg
                                                 alt="Productimage">
                                             </td>
                                             <td>
@@ -31,24 +31,24 @@
                                                     class="list-group-item list-group-item-action flex-column align-items-start"> -->
                                                 <div class="d-flex w-100 justify-content-between">
                                                     <h5 class="mb-1">
-                                                        <%=product[i].products.name %>
+                                                        <%=product[i]?.products.name %>
                                                     </h5>
                                                 </div>
                                                 <p class="mb-1">
-                                                    Quantity: <%=product[i].qty %>
+                                                    Quantity: <%=product[i]?.qty %>
                                                 </p>
-                                                <!-- <h5 class="mb-1">Price : ₹ <%=product[i].products.marketPrice %>
+                                                <!-- <h5 class="mb-1">Price : ₹ <%=product[i]?.products?.marketPrice %>
                                                 </h5> -->
                                                 <h5 class="mb-1">Total : ₹
-                                                    <%=product[i].products.marketPrice*product[i].qty%>
+                                                    <%=product[i]?.products?.marketPrice*product[i]?.qty%>
                                                 </h5>
                                                 <small class="text-muted">Donec id elit non mi porta.</small>
                                                 <span>
-                                                    <% if (product[i].return) { %>
+                                                    <% if (product[i]?.return) { %>
                                                         <h4> The item was returned </h4>
                                                         <%}else{ %>
                                                             <a class="btn btn-primary" type="button"
-                                                                onclick="returnProduct('<%=product[i]._id%>,<%=product[i].itemId%>,<%=product[i].item%>,<%=product[i].qty %>')">return
+                                                                onclick="returnProduct('<%=product[i]?._id%>,<%=product[i]?.itemId%>,<%=product[i]?.item%>,<%=product[i]?.qty %>')">return
                                                             </a>
                                                             <% } %>
                                                 </span>
@@ -63,15 +63,15 @@
                                 <!-- for fun -->
                                 
                                 <div class="container">
-                                    <% for (let i=0; i < product.length; i++) { %>
+                                    <% for (let i=0; i < product?.length; i++) { %>
                                     <div class="card">
                                         <figure>
-                                            <img src=/productImages/<%=product[i].products._id %>0.jpg alt="Image">
+                                            <img src=/productImages/<%=product[i]?.products?._id %>0.jpg alt="Image">
                                         </figure>
                                         <div class="card-content">
-                                            <h3>Name: <%=product[i].products.name %></h3>
-                                            <p>Quantity: <%=product[i].qty %></p>
-                                            <p>Price: <%=product[i].products.marketPrice*product[i].qty%></p>
+                                            <h3>Name: <%=product[i]?.products?.name %></h3>
+                                            <p>Quantity: <%=product[i]?.qty %></p>
+                                            <p>Price: <%=product[i]?.products?.marketPrice*product[i]?.qty%></p>
                                         </div>
                                     </div>
                                     <% } %>
@@ -99,11 +99,10 @@
             data: { orderId, itemId, productId, quantity },
             method: 'post',
             success: (response) => {
-                if (response.status) {
+                if (response?.status) {
                     alert('success')
                     location.reload()
-                }
-                else {
+                }else {
                     alert(' Error in returning product')
                     location.reload()
                 }
