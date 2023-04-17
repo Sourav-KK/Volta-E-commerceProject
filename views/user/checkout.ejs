@@ -109,8 +109,9 @@
                                     <div class="row"> <p  onclick = "openList1()">Click to choose address</p>
                                         <div class="col-lg-9">
                                             <ol id = "list1" style="display: none;">
-                                                <% if (address.lenght > 0) { for (let i = 0; i < address?.address?.length; i++) { %>
+                                                <% if (address?.length > 0) { for (let i = 0; i < address?.address?.length; i++) { %>
                                                     <li><a href = "/checkout?id=<%=address?.address[i]?._id%>"><span><%=i+1%>.</span><%=address?.address[i]?.streetAddress%>, <%=address?.address[i]?.state%>, <%=address?.address[i]?.country%>, <%=address?.address[i]?.pincode%>,</a></li>
+
                                                 <%} }else{ %>
                                                     <li><p>No address to display. You can add new address in<a href="/account">acount</a>. Or we will save the address once you place the order</p></li>
                                                 <% }%> %>
@@ -234,6 +235,22 @@
                                                 <div class="card-header" id="heading-3">
                                                     <h2 class="card-title">
                                                         <label class="radio-inline">
+                                                            <script>
+                                                                    function display(x) {
+                                                                        document.getElementById('paypal').style.display = x;
+                                                                        if (x == 'none') {
+                                                                            document.getElementById('placeOrder').style.display = '';
+                                                                        }else if(x=='yes'){
+                                                                            document.getElementById('placeOrder').style.display = '';
+                                                                            
+                                                                        }
+                                                                        else {
+                                                                            // document.getElementById('checkout-formm').submit() ;
+
+                                                                            document.getElementById('placeOrder').style.display = '';
+                                                                        }
+                                                                    }
+                                                            </script>
                                                             <input type="radio" name="paymentMethod" value="COD" required
                                                                 onclick="display('none')">COD
                                                         </label>
@@ -458,23 +475,9 @@
 function tony() {
     
 }
-    function display(x) {
-        document.getElementById('paypal').style.display = x;
-        if (x == 'none') {
-            document.getElementById('placeOrder').style.display = '';
-        }else if(x=='yes'){
-            document.getElementById('placeOrder').style.display = '';
-            
-        }
-        else {
-            // document.getElementById('checkout-formm').submit() ;
 
-            document.getElementById('placeOrder').style.display = '';
-        }
-    }
 
 function openList1() {
-    console.log(' hello in checkout');
     let list = document.getElementById("list1");
 
     if (list.style.display == "none"){
