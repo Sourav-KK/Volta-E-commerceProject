@@ -6,7 +6,6 @@ const accountHelpers = require('../helpers/accountHelpers');
 const bannerHelpers = require('../helpers/bannerHelpers');
 
 const db = require('../config/connection');
-const { response } = require('../app');
 const { Convert } = require("easy-currencies");
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -201,7 +200,6 @@ const getCheckout = async (req, res) => {
     let mobile = req.session.user.mobile        
     let data = await userHelpers.getCart(user)
     let address = await accountHelpers.getAddresses(user)
-    console.log(address," asdj j hj");
     let cartCount =  await userHelpers.getCartCount(req.session.user._id)
     let total = 0
     if (data.length > 0) {
@@ -241,7 +239,6 @@ const couponValidator = async (req,res)=>{
             couponAmount = response.discountAmount
             res.send(response)
         })
-    
     } catch (error) {
         console.log(error.message,'error in + userControllers + couponValidator');
     }
@@ -249,8 +246,6 @@ const couponValidator = async (req,res)=>{
 
 
 const postCheckout = async (req, res) => {
-    console.log("sdfjhj j ");
-    console.log("post checkout details 12122");
     let products = await userHelpers.getCartProductList(req.session.user)
 
     let totalPrice = await userHelpers.getTotalAmnt(req.session.user._id)
@@ -345,7 +340,6 @@ const getCancelorder = async (req, res) => {
 }
 
 const postRemoveOrderProduct = async (req, res) => {
-    // console.log(id, ' id of the order in + userControllers + postRemoveOrderProduct');
     await userHelpers.removeOrderProduct(id)
         res.redirect('/orderlist')
 }
@@ -472,7 +466,6 @@ const postEditAddress = async (req,res)=>{
         await accountHelpers.updateAddress(userId,req.body).then((response)=>{
             res.json(response)
         })
-        
     } catch (error) {
         console.log(error.message,'error in + userControllers + postEditAddress');
     }

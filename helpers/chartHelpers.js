@@ -3,7 +3,6 @@ module.exports = {
 
     // chart // 
     totalUsers: () => {
-        console.log(' in chartHelpers + totalUsers');
         return new Promise(async (resolve, reject) => {
             try {
                 let totUsers = await db.users.find().count()
@@ -14,7 +13,6 @@ module.exports = {
         })
     },
     totalOrders: () => {
-        console.log(' in chartHelpers + totalOrders');
         return new Promise(async (resolve, reject) => {
             try {
                 let totOrders = await db.order.find().count()
@@ -25,7 +23,6 @@ module.exports = {
         })
     },
     paymentCOD: () => {
-        console.log(' in chartHelpers + paymentCOD');
         return new Promise(async (resolve, reject) => {
             try {
                 const payment = await db.order.find({ "deliveryDetails.paymentMethod": "COD" }).count()
@@ -35,32 +32,19 @@ module.exports = {
             }
         })
     },
-        paymentPaypal:()=>{
-            console.log(' in chartHelpers + paymentPaypal');
-            return new Promise(async(resolve, reject) => {
-                try {
-                    const payment = await db.order.find({ "deliveryDetails.paymentMethod": "PayPal" }).count()
-                    resolve(payment)
-    
-                } catch (error) {
-                    console.log(error.message,' error in chartHelpers + paymentPaypal');
-                }
-            })
-        },
-        // paymenRazorpay:()=>{
-        //     console.log(' in chartHelpers + paymenRazorpay');
-        //     return new Promise(async(resolve, reject) => {
-        //         try {
-        //             const payment = await db.order.find({ "deliveryDetails.paymentMethod": "Razorpay" }).count()
-        //             resolve(payment)
-         
-        //         } catch (error) {
-        //             console.log(error.message,' error in chartHelpers + paymenRazorpay');
-        //         }
-        //     })
-        // },
+    paymentPaypal: () => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const payment = await db.order.find({ "deliveryDetails.paymentMethod": "PayPal" }).count()
+                resolve(payment)
+
+            } catch (error) {
+                console.log(error.message, ' error in chartHelpers + paymentPaypal');
+            }
+        })
+    },
+
     monthlyOrders: () => {
-        console.log(' in chartHelpers + monthlyOrders');
         return new Promise(async (resolve, reject) => {
             try {
                 let orders = await db.order.aggregate([
@@ -87,16 +71,5 @@ module.exports = {
             }
         })
     },
-
-    //     xxx:()=>{
-    //         console.log(' in chartHelpers + xxx');
-    //         return new Promise(async(resolve, reject) => {
-    //             try {
-
-    //             } catch (error) {
-    //                 console.log(error.message,' error in chartHelpers + xxx');
-    //             }
-    //         })
-    //     }
 }
 

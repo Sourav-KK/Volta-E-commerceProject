@@ -40,7 +40,6 @@ module.exports={
         })
     },
     deleteCoupon:(coupId)=>{
-        console.log('in couponHelpers + deleteCoupon');
         return new Promise(async (resolve, reject)=>{
             try {
                 db.coupon.deleteOne({"_id":coupId}).then((response)=>{
@@ -52,7 +51,6 @@ module.exports={
         })
     },
     getOneCoupon:(id)=>{
-        console.log('in couponHelpers + getOneCoupon');
         return new Promise(async (resolve, reject)=>{
             try {
                 let one = db.coupon.find({_id: id})
@@ -63,11 +61,6 @@ module.exports={
         })
     },
     editCoupon:(data)=>{
-        console.log(data,'in couponHelpers + editCoupon');
-        
-        console.log(data.couponCode,'in couponHelpers + editCoupon');
-        console.log(data.discount,'in couponHelpers + editCoupon');
-        console.log(data.minAmount,'in couponHelpers + editCoupon');
         return new Promise(async (resolve, reject)=>{
             try {
                 db.coupon.updateOne({code:data.couponCode},
@@ -77,9 +70,7 @@ module.exports={
                             discount: data.discount,
                             minAmount:data.minAmount
                         }
-                    }).then((response)=>{
-                        console.log(response,'response in couponHelpers + editCoupon');
-                        
+                    }).then((response)=>{                        
                     resolve(response)
                 })
             } catch (error) {
@@ -88,7 +79,6 @@ module.exports={
         })
     },
     checkCoupon:(codeo)=>{
-        console.log('in couponHelpers + checkCoupon');
         return new Promise(async (resolve, reject)=>{
         try {
                 await db.coupon.findOne({code:codeo}).then((response)=>{
@@ -100,11 +90,9 @@ module.exports={
         })
     },
     couponValidator:(codeo, usero, totalPriceo)=>{
-            console.log('in couponHelpers + couponValidator');
             return new Promise(async (resolve, reject)=>{
                 try {
                     let couponExists = await db.coupon.findOne({code:codeo})
-                    console.log(couponExists,'couponExists in couponHelpers + couponValidator');
 
                     if (couponExists) {
                         if (new Date(couponExists.expiry) - new Date() >0 ) {
@@ -124,14 +112,4 @@ module.exports={
                 }
             })
         }
-
-    // xxx:()=>{
-    //     console.log('in couponHelpers + xxx');
-    //     return new Promise(async (resolve, reject)=>{
-    //         try {
-    //         } catch (error) {
-    //              console.log(error.message, ' err in unblocking user in couponHelpers + xxx');
-    //         }
-    //     })
-    // }
 }

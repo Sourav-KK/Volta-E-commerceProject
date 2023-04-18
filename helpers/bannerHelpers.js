@@ -16,7 +16,6 @@ module.exports = {
         })
     },
     getBanner: (id) => {
-        console.log(' in bannerHelpers + getBanner');
         return new Promise((resolve, reject) => {
             try {
                 db.banner.find({ _id: id }).then((data) => {
@@ -29,7 +28,6 @@ module.exports = {
     },
     
     allBanners:()=>{
-        console.log(' in bannerHelpers + allBanners');
         return new Promise(async (resolve, reject)=>{
             try {
                 db.banner.find({}).then((response)=>{
@@ -42,7 +40,6 @@ module.exports = {
     },
 
     getOneBanner:(id)=>{
-        console.log(' in bannerHelpers + getOneBanner');
         return new Promise(async (resolve, reject)=>{
             try {
                 db.banner.findOne({_id: new ObjectId(id)}).then((response)=>{
@@ -55,8 +52,7 @@ module.exports = {
     },
 
     removeBanner:(ban)=>{
-        console.log(' in bannerHelpers + removeBanner');
-        console.log(ban.bannerId,'ban.bannerId in bannerHelpers + removeBanner');
+        // console.log(ban.bannerId,'ban.bannerId in bannerHelpers + removeBanner');
         return new Promise(async (resolve, reject)=>{
             try {
                 db.banner.findOneAndRemove({_id:new ObjectId(ban.bannerId)}).then(()=>{
@@ -75,7 +71,6 @@ module.exports = {
     },
     
     editBanner:(data,bannerId)=>{
-        console.log(' in bannerHelpers + editBanner');
         return new Promise(async (resolve, reject)=>{
             try {
                 await db.banner.updateOne(
@@ -102,15 +97,4 @@ module.exports = {
             }
         })
     },
-
-    // xxx:()=>{
-    //     console.log(' in bannerHelpers + xxx');
-    //     return new Promise(async (resolve, reject)=>{
-    //         try {
-
-    //         } catch (error) {
-    //              console.log(error.message, ' err in bannerHelpers + xxx');
-    //         }
-    //     })
-    // },
 }

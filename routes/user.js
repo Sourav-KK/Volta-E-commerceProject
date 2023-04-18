@@ -1,7 +1,6 @@
 var express = require('express');
-const { response } = require('../app');
 var router = express.Router();
-const {verifyUserLogin}= require('../controllers/userVerify');
+const {verifyUserLogin} = require('../controllers/userVerify');
 const {getLandingPage,getUserLogin, postUserLogin, getUserSignup, postUserSignup, getUserHome, getOTPLogin, postOTPLogin, getEnterOtp, postOTPVerify, getUserlogout, getAccount, postUpdateAccount, addAddress, postaddAddress, removeAddress, getEditAddress, postEditAddress, getProduct, getCart, getToAddCart, postChangeProductQuantity, postRemoveCartProduct, getCheckout, postCheckout, checkCoupon, couponValidator, getSuccess, paypalOrder, paypalSuccess, getOrderlist, getCancelorder, postRemoveOrderProduct, getOrderDetails, returnItem} = require('../controllers/userControllers');
 
 /* GET home page. */
@@ -10,21 +9,16 @@ router.get('/', getLandingPage );
 router.get('/home', verifyUserLogin, getUserHome )
 
 // LOGIN, SIGNUP, Logout, Ootppage
-router.get('/login', getUserLogin )
 
-router.post('/login', postUserLogin )
+router.route('/login').get(getUserLogin)
+                     .post(postUserLogin)
 
-router.get('/signup', getUserSignup )
+router.route('/signup').get(getUserSignup)
+                        .post(postUserSignup)
 
-router.post('/signup', postUserSignup )
+router.route('/otplogin').get(getOTPLogin).post(postOTPLogin)
 
-router.get('/otplogin', getOTPLogin )
-
-router.post('/otplogin', postOTPLogin )//send otp code
-
-router.get('/enterotp', verifyUserLogin, getEnterOtp)
-
-router.post('/enterotp', postOTPVerify)
+router.route('/enterotp').get(verifyUserLogin, getEnterOtp).post(postOTPVerify)
 
 router.get('/logout', getUserlogout)// logout
 // <!-- END LOGIN && SIGNUP -->
@@ -61,9 +55,8 @@ router.post('/removeCartProduct', verifyUserLogin, postRemoveCartProduct)
 
 // Checkout
 
-router.get('/checkout', verifyUserLogin, getCheckout)
-
-router.post('/checkout',verifyUserLogin, postCheckout)
+router.route('/checkout').get( verifyUserLogin, getCheckout)
+                        .post(verifyUserLogin, postCheckout)
 
 router.post('/couponCheck',verifyUserLogin, checkCoupon)
 

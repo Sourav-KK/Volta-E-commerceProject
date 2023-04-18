@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const { users } = require('../config/connection');
 const admincontroller = require('../controllers/adminController');
 const { verifyAdminLogin } = require('../controllers/adminVerify');
 
@@ -36,14 +35,6 @@ router.route('/deleteproduct').get(verifyAdminLogin, getDeleteProduct)
 
 router.route('/editImage').get( verifyAdminLogin, editImage)
                           .post(verifyAdminLogin, changeCover)
-
-// router.get('/productmanagement',verifyAdminLogin, admincontroller.getProductManagement)
-// router.get('/addproduct',verifyAdminLogin, admincontroller.getAddProduct)
-// router.post('/addproduct',verifyAdminLogin, admincontroller.postAddProduct)
-// router.get('/deleteproduct',verifyAdminLogin, admincontroller.getDeleteProduct)
-// router.delete('/deleteproduct',verifyAdminLogin, admincontroller.deleteProduct)
-// .post(verifyAdminLogin, admincontroller.deleteProduct)
-
 /* ------------------------------------ end -------------------------------------- */
 
 
@@ -62,13 +53,10 @@ router.get('/deletecategory', postdeleteCategory)
 
 router.route('/editcategory').get(getOneCategory)
                               .post(postEditOneCategory)
-
-
-
 /* ------------------------------------ end -------------------------------------- */
 
-/* ------------------------------------ Order management  -------------------------------------- */
 
+/* ------------------------------------ Order management  -------------------------------------- */
 router.get('/orders', verifyAdminLogin, admincontroller.getOrders)
 
 router.get('/approve', verifyAdminLogin, admincontroller.getApprove)
@@ -76,12 +64,10 @@ router.get('/approve', verifyAdminLogin, admincontroller.getApprove)
 router.get('/cancel', verifyAdminLogin, admincontroller.getCancel)
 
 router.get('/orderStatus', verifyAdminLogin, admincontroller.getOrderStatus)
-
 /* ------------------------------------  end  -------------------------------------- */
 
-router.get('/salesreport', verifyAdminLogin, admincontroller.salesGraphs)
 
-// router.get('/sales-report-documents', verifyAdminLogin, admincontroller.getSales_Report)
+router.get('/salesreport', verifyAdminLogin, admincontroller.salesGraphs)
 
 router.get('/documents', verifyAdminLogin, admincontroller.sales_Docs)
 
@@ -99,10 +85,6 @@ router.delete('/removeCoupon', verifyAdminLogin, admincontroller.deleteCoupon)
 router.route('/edit-One-coupon').get(verifyAdminLogin, admincontroller.editCoupon)
   .post(verifyAdminLogin, admincontroller.postEditCoupon)
 
-// router.get('/coupon-Managemnt',admincontroller.geCoupons)
-// router.get('/edit-One-coupon',admincontroller.editCoupon)
-// router.put('/edit-One-coupon',admincontroller.putEditCoupon)
-
 
 /* -------------------------------------------------------------------------- */
 /*                                Banner management                           */
@@ -110,14 +92,13 @@ router.route('/edit-One-coupon').get(verifyAdminLogin, admincontroller.editCoupo
 router.get('/bannerPage',verifyAdminLogin, bannerPage)
 
 router.route('/bannerManagements').get(verifyAdminLogin, banners)
-  .post(verifyAdminLogin, addBanners)
-  .delete(verifyAdminLogin, removeBanner)
-// router.get('/edit-banner',admincontroller.editBanner)
+                            .post(verifyAdminLogin, addBanners)
+                            .delete(verifyAdminLogin, removeBanner)
 
 router.route('/edit-banner').get(verifyAdminLogin, admincontroller.editBanner)
-  .post(verifyAdminLogin, admincontroller.postEditBanner)
+                            .post(verifyAdminLogin, admincontroller.postEditBanner)
 
-// offers : 
+// offers 
 router.route('/offers').get(verifyAdminLogin, offers)
                        .post(verifyAdminLogin, addOffers)
 

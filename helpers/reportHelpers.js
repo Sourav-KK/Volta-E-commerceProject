@@ -5,10 +5,8 @@ const { resolve } = require('path');
 const { ObjectId } = require('mongodb');
 
 
-module.exports = {
-    
+module.exports = {    
     dailySales: () => {
-        console.log('in reportHelpers + dailySales');
         let todayDate = new Date()
         let thisDay = todayDate.getDate()
 
@@ -41,7 +39,6 @@ module.exports = {
                         }
                     }
                 ]).then((response) => {
-                    console.log(response,' response in reportHelpers + dailySales');
                     resolve(response)
                 })
             } catch (error) {
@@ -51,8 +48,6 @@ module.exports = {
     },
 
     monthlySales: () => {
-        console.log('in reportHelpers + monthlySales');
-
         let date = new Date()
         let thisMonth = date.getMonth()
 
@@ -94,8 +89,6 @@ module.exports = {
         })
     },
     yearlySales: () => {
-        console.log('in reportHelpers + yearlySales');
-
         let date = new Date()
         let thisYear = date.getFullYear()
 
@@ -138,7 +131,6 @@ module.exports = {
         })
     },
     oneProduct: (data) => {
-        console.log(data, ' data in reportHelpers + oneProduct');
         return new Promise(async (resolve, reject) => {
             try {
                 let onprod = [] 
@@ -156,7 +148,6 @@ module.exports = {
                 } 
 
                 let products = [].concat(...onprod);
-                console.log(products,' products in reportHelpers + oneProduct');
 
                 for (let i = 0; i < products.length; i++) {
                     for (let j = 0; j < data.length; j++) {
@@ -166,24 +157,10 @@ module.exports = {
                       }
                     }
                   }
-                console.log(products,' products in reportHelpers + oneProduct');
-
                 resolve(products)
             } catch (error) {
                 console.log(error.message, ' error in reportHelpers + oneProduct');
             }
         })
     },
-
-    // ,xxx:()=>{
-    //     console.log('in reportHelpers + xxx');
-    //     return new Promise(async (resolve, reject)=>{
-    //         try {
-
-    //         } catch (error) {
-    //             console.log(error.message, ' error in reportHelpers + xxx');
-    //         }
-
-    //     })
-    // },
 }

@@ -1,14 +1,9 @@
 const db = require('../config/connection');
 const bcrypt = require('bcrypt');
-const { Collection } = require('mongoose');
-const { orders } = require('@paypal/checkout-server-sdk');
 const { ObjectId } = require('mongodb');
-// const adminDetails = require('../config/adminDetails');
-
 
 module.exports = {
     dologin: (adminData) => {
-        console.log(adminData, " adminData in doLogin");
         return new Promise(async (resolve, reject) => {
             try {
                 let adminloginStatus = false
@@ -17,7 +12,6 @@ module.exports = {
                 if (admin) {
                     bcrypt.compare(adminData.password, admin.password).then((status) => {
                         if (status) {
-                            console.log(" login successfull");
                             response.admin = admin
                             response.status = true
                             resolve(response)//this response contains both user and status
@@ -36,7 +30,6 @@ module.exports = {
         })
     },
     getAllUsers: () => {
-        console.log(" in adminHelpers + getAllUsers");
         return new Promise(async (resolve, reject) => {
             try {
                 let allUsers = await db.users.find({})
@@ -47,7 +40,6 @@ module.exports = {
         })
     },
     oneUser: (userId) => {
-        console.log(" in adminHelpers + oneUser");
         return new Promise(async (resolve, reject) => {
             try {
                 db.users.findOne({_id: new ObjectId(userId)}).then((response)=>{
@@ -59,7 +51,6 @@ module.exports = {
         })
     },
     getBlockOneUser:(data)=>{
-        console.log(data, " data of blocking user ");
         return new Promise(async (resolve, reject) => {
             try {
                 let blockedUser = await db.users.updateOne({_id:data},{$set:{blocked:true}})
@@ -70,7 +61,6 @@ module.exports = {
         })
     },
     getUnblockUser:(data)=>{
-        console.log(data, ' in getunblockuser');
         return new Promise(async(resolve, reject) => {
             try {
                 let unblockUser = await db.users.updateOne({_id:data},{$set:{blocked:false}})
@@ -82,7 +72,6 @@ module.exports = {
     },
 
     getOrders:()=>{
-        console.log(' in adminHelpers + getOrders');
         return new Promise(async(resolve, reject) => {
             try {
                 let allOrders = await db.order.find({})
@@ -94,7 +83,6 @@ module.exports = {
     },
 
     getApprove:(orderId)=>{
-    console.log(' in adminHelpers + getApprove');
     return new Promise(async(resolve, reject) => {
         try {
             let approve = await db.order.updateOne({_id:orderId},{$set:{approval:true}})
@@ -106,7 +94,6 @@ module.exports = {
     },
 
     getCancel:(orderId)=>{
-        console.log(' in adminHelpers + getCancel');
         return new Promise(async(resolve, reject) => {
             try {
                 let approve = await db.order.updateOne({_id:orderId},{$set:{approval:false}})
@@ -118,7 +105,6 @@ module.exports = {
     },
 
         OrderStatus:(orderId)=>{
-        console.log(' in adminHelpers + OrderStatus');
         return new Promise(async(resolve, reject) => {
             try {
              let OrderStatus = await db.order.updateOne({_id:orderId},{$inc:{orderStatus:1}})
@@ -131,17 +117,3 @@ module.exports = {
     
    
 }
-
-
-
-
-//     xxx:()=>{
-//         console.log(' in adminHelpers + xxx');
-//         return new Promise(async(resolve, reject) => {
-//             try {
-                
-//             } catch (error) {
-//                 console.log(error.message,' error in adminHelpers + xxx');
-//             }
-//         })
-//     }

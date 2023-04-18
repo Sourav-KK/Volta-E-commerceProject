@@ -101,8 +101,6 @@ module.exports = {
     },
     // chaning cover image of products
     changeCover: (neww, old) => {
-        console.log(neww, ' neww in productHelpers + changeCover');
-        console.log(old, ' old in productHelpers + changeCover');
         return new Promise(async (resolve, reject) => {
             try {
                 let newDefaultPath = `./public/productImages/${neww}.jpg`;
@@ -127,8 +125,7 @@ module.exports = {
                         // Rename the temporarily named file to the old name if it exists
                         if (fs.existsSync(`./public/productImages/temp-${newDefaultName}`)) {
                             fs.renameSync(`./public/productImages/temp-${newDefaultName}`, `./public/productImages/${defaultName}`);
-                        }
-                        console.log('Images swapped successfully.');
+                        }// Images swapped successfully
                         resolve();
                     }
                 });
@@ -163,7 +160,6 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             try {
                 let data = db.categories(catData)
-                console.log(`${data}: category added successfullly `)
                 data.save()
                 resolve(data._id)
             } catch (error) {
@@ -172,11 +168,9 @@ module.exports = {
         })
     },
     deleteCategories: (id) => {
-        console.log(' inside deleteCategories in productHelpers');
         return new Promise(async (resolve, reject) => {
             try {
                 await db.categories.deleteOne({ _id: id }).then((del) => {
-                    console.log(` successfully deleted the category ${id}`);
                     resolve(del)
                 })
             } catch (error) {
@@ -185,11 +179,9 @@ module.exports = {
         })
     },
     getOneCategory: (id) => {
-        console.log(' in productHelpers+editCategory with id:', id);
         return new Promise(async (resolve, reject) => {
             try {
                 await db.categories.findById({ _id: id }).then((data) => {
-                    console.log(` obtained product in editOneCategory is ${data}`);
                     resolve(data)
                 })
             } catch (error) {
@@ -201,7 +193,6 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             try {
                 await db.categories.updateOne({ _id: catId }, { category: data.category }).then((done) => {
-                    console.log(' category successfully updated');
                     resolve(done)
                 })
             } catch (error) {
@@ -212,7 +203,6 @@ module.exports = {
 
     // inventory
     decreasePdtQuantity: (prod) => {
-        console.log(prod, ' prod in userHelpers + decreaseQuantity');
         return new Promise(async (resolve, reject) => {
             try {
                 for (let i = 0; i < prod.length; i++) {

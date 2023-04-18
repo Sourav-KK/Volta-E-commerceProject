@@ -78,7 +78,6 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             try {
                 let user = await db.users.findOne({ _id: userId })
-                // console.log(user.address, 'user.address in accountHelpers + updateAddress');
                 let address = user.address
                 let addressIndex = address.findIndex(address => address._id == data.addId)
                 

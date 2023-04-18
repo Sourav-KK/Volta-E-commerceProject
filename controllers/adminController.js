@@ -2,16 +2,12 @@ const producthelpers = require('../helpers/productHelpers');
 const couponHelpers = require('../helpers/couponHelpers');
 const chartHelpers = require('../helpers/chartHelpers');
 const offerHelpers = require('../helpers/offerHelpers');
-const userHelpers = require('../helpers/userHelpers');
 const adminHelpers = require('../helpers/adminHelpers');
 const reportHelpers = require('../helpers/reportHelpers');
 const bannerHelpers = require('../helpers/bannerHelpers');
 const productHelpers = require('../helpers/productHelpers');
 
-const fs = require('fs');
 const router = require('../routes/admin');
-const { log } = require('console');
-const { response } = require('express');
 
 //admin login && logout
 const adminloginget = async function (req, res, next) {
