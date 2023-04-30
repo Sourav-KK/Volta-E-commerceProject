@@ -83,7 +83,7 @@ router.post('/addcoupon', verifyAdminLogin, admincontroller.addCoupons)
 router.delete('/removeCoupon', verifyAdminLogin, admincontroller.deleteCoupon)
 
 router.route('/edit-One-coupon').get(verifyAdminLogin, admincontroller.editCoupon)
-  .post(verifyAdminLogin, admincontroller.postEditCoupon)
+                                .post(verifyAdminLogin, admincontroller.postEditCoupon)
 
 
 /* -------------------------------------------------------------------------- */

@@ -1,6 +1,4 @@
 <div class="container-fluid page-body-wrapper">
-  
-
   <!-- partial -->
   <div class="main-panel">
     <div class="content-wrapper">
@@ -29,7 +27,6 @@
                 </h5>
               </div>
               <canvas id="doughnutChartt" style="width:100%;max-width:700px"></canvas>
-              <!-- <canvas id="myChart2" style="width:100%;max-width:700px"></canvas> -->
             </div>
           </div>
         </div>
@@ -55,8 +52,8 @@
         fill: true,
         backgroundColor: 'rgba(44, 120, 220, 0.2)',
         borderColor: 'rgba(44, 120, 220)',
-        data: ["<%=monthly[0] %>","<%=monthly[1] %>","<%=monthly[2] %>","<%=monthly[3] %>","<%=monthly[4] %>","<%=monthly[5] %>",
-                               "<%=monthly[6] %>","<%=monthly[7] %>","<%=monthly[8] %>","<%=monthly[9] %>","<%=monthly[10] %>","<%=monthly[11] %>"]
+        data: ["<%=monthly[0] %>", "<%=monthly[1] %>", "<%=monthly[2] %>", "<%=monthly[3] %>", "<%=monthly[4] %>", "<%=monthly[5] %>",
+          "<%=monthly[6] %>", "<%=monthly[7] %>", "<%=monthly[8] %>", "<%=monthly[9] %>", "<%=monthly[10] %>", "<%=monthly[11] %>"]
       },
       ]
     },
@@ -79,7 +76,7 @@
     ],
     datasets: [{
       label: 'My First Dataset',
-      data: ["<%=paymentPaypal %>","<%=paymentCOD %>"],
+      data: ["<%=paymentPaypal %>", "<%=paymentCOD %>"],
       backgroundColor: [
         'rgb(255, 99, 100)',
         'rgb(54, 162, 235)',
@@ -88,7 +85,7 @@
       hoverOffset: 4
     }]
   };
-  
+
   let charty = document.getElementById("doughnutChartt")
   new Chart(charty, {
     type: 'doughnut',

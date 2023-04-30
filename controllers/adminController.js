@@ -7,9 +7,8 @@ const reportHelpers = require('../helpers/reportHelpers');
 const bannerHelpers = require('../helpers/bannerHelpers');
 const productHelpers = require('../helpers/productHelpers');
 
-const router = require('../routes/admin');
 
-//admin login && logout
+//admin login 
 const adminloginget = async function (req, res, next) {
     if (req.session.adminloggedIn) {
         res.redirect('admin/adminpanel')
@@ -29,7 +28,7 @@ const adminloginPost = async (req, res) => {
         }
     })
 }
-
+// admin logout
 const getAdminLogout = async (req, res) => {
     try {
         req.session.adminloggedIn = false
@@ -77,28 +76,32 @@ const adminPanelget = async function (req, res, next) {
     months.forEach(elem => {
         monthly[elem._id - 1] = elem.count
     })
-    // console.log(months[1], "*****");
 
     res.render('admin/adminPanel', { layout: 'admin/adminLayout', formattedDate, activeUsersCount, orderCount, productsCount, categoryCount, orders,totalUsers, totalOrders, paymentCOD, paymentPaypal, months })
 }
 
+// All user details
 const getUserDetails = async (req, res) => {
     adminHelpers.getAllUsers().then((userlist) => {
         res.render('admin/adminUserListing', { userlist, layout: 'admin/adminLayout' })
     })
 }
+
+// details of one user
 const oneUser = async (req, res) => {
     adminHelpers.oneUser(req.query.id).then((response)=>{        
         res.render('admin/oneUser',{layout: 'admin/adminLayout',response})
     })
 }
 
+// rendern products page
 const getProductManagement = async (req, res) => {
     producthelpers.getAllProducts().then((products) => {
         res.render('admin/productManagement', { products, layout: 'admin/adminLayout' })
     })
 }
 
+// render new product add page
 const getAddProduct = async (req, res) => {
     productHelpers.allCategories().then((cat) => {
         if (cat) {
@@ -107,6 +110,7 @@ const getAddProduct = async (req, res) => {
     })
 }   
 
+// add new product
 const postAddProduct = (req, res) => {
     try {
         let data = {
@@ -131,6 +135,8 @@ const postAddProduct = (req, res) => {
         console.log(err);
     }
 }
+
+// to edit one product
 const getEditProduct = async (req, res) => {
     const id = req.query.id
     productHelpers.getOneProduct(id).then((pdts) => {
@@ -143,6 +149,8 @@ const getEditProduct = async (req, res) => {
         })
     })
 }
+
+// edit one product
 const postEditProduct = async (req, res) => {
     try {
         proId = req.query.id
@@ -167,7 +175,7 @@ const getDeleteProduct = async (req, res) => {
     })
 }
 
-// user block or unblock
+// block user 
 const postBlock = async (req, res) => {
     const id = req.query.id
     adminHelpers.getBlockOneUser(id).then(() => {
@@ -175,6 +183,7 @@ const postBlock = async (req, res) => {
     })
 }
 
+//  unblock user
 const postUnblock = async (req, res) => {
     const id = req.query.id
     adminHelpers.getUnblockUser(id).then(() => {
@@ -182,15 +191,19 @@ const postUnblock = async (req, res) => {
     })
 }
 
+// render all catefories page
 const getcategories = async (req, res) => {
     productHelpers.allCategories().then((cat) => {
         res.render('admin/categories', { cat, layout: 'admin/adminLayout' })
     })
 }
+
+// render page to add new categories
 const getAddCategories = async (req, res) => {
     res.render('admin/addCategories', { layout: 'admin/adminLayout' })
 }
 
+// add new category
 const postAddCategories = async (req, res) => {
     let name = req.body
     productHelpers.addcategories(name).then((id) => {
@@ -198,6 +211,7 @@ const postAddCategories = async (req, res) => {
     })
 }
 
+// delete one category 
 const postdeleteCategory = async (req, res) => {
     let id = req.query.id
     productHelpers.deleteCategories(id).then((delcat) => {
@@ -205,6 +219,7 @@ const postdeleteCategory = async (req, res) => {
     })
 }
 
+// show one category
 const getOneCategory = (req, res) => {
     let id = req.query.id
     productHelpers.getOneCategory(id).then((catData) => {
@@ -218,6 +233,7 @@ const getOneCategory = (req, res) => {
     })
 }
 
+// edit one category
 const postEditOneCategory = async (req, res) => {
     let catId = req.query.id
     let data = {
@@ -233,6 +249,7 @@ const postEditOneCategory = async (req, res) => {
         }
     })
 }
+// render page to edit product image
 const editImage = async (req, res) => {
     try {
         productHelpers.getOneProduct(req.query.id).then((products)=>{
@@ -242,6 +259,8 @@ const editImage = async (req, res) => {
         console.log(error.message,' error in admincontroller + editImage');
     }
 }
+
+// change cover image of product 
 const changeCover = async (req, res) => {
     try {        
         productHelpers.changeCover(req.body.imageId,req.body.defaultId).then((response)=>{
@@ -252,6 +271,7 @@ const changeCover = async (req, res) => {
     }
 }
 
+// show all orders
 const getOrders = async (req, res) => {
     try {
         let orders = await adminHelpers.getOrders()
@@ -262,6 +282,7 @@ const getOrders = async (req, res) => {
     }
 }
 
+//  approve order status
 const getApprove = async (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -275,6 +296,7 @@ const getApprove = async (req, res) => {
     })
 }
 
+// cancel order
 const getCancel = async (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -288,6 +310,7 @@ const getCancel = async (req, res) => {
     })
 }
 
+// order status
 const getOrderStatus = async (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -321,7 +344,6 @@ const salesGraphs = async (req, res) => {
         month.forEach(elem => {
             monthly[elem._id - 1] = elem.count
         })
-        // console.log(month[1], "*****");
 
         res.render('admin/salesReports', { totalUsers, totalOrders, monthly, paymentCOD, paymentPaypal, layout: 'admin/adminLayout' })
     } catch (error) {
@@ -329,6 +351,7 @@ const salesGraphs = async (req, res) => {
     }
 }
 
+// pdf of sales report
 const sales_Docs = async (req, res) => {
     try {
         let newMonthy, newYearly
@@ -360,6 +383,7 @@ const geCoupons = async (req, res) => {
     })
 }
 
+// add new coupons
 const addCoupons = async (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -371,6 +395,8 @@ const addCoupons = async (req, res) => {
         }
     })
 }
+
+// delete coupons
 const deleteCoupon = async (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -383,6 +409,8 @@ const deleteCoupon = async (req, res) => {
         }
     })
 }
+
+// edit one coupon
 const editCoupon = async (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -394,6 +422,8 @@ const editCoupon = async (req, res) => {
         }
     })
 }
+
+// update edit
 const postEditCoupon = async (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -406,6 +436,7 @@ const postEditCoupon = async (req, res) => {
     })
 }
 
+// render banner page
 const bannerPage = async (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -415,6 +446,8 @@ const bannerPage = async (req, res) => {
         }
     })
 }
+
+// show all banners
 const banners = async (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -425,6 +458,8 @@ const banners = async (req, res) => {
         }
     })
 }
+
+// add new banner
 const addBanners = async (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -441,6 +476,7 @@ const addBanners = async (req, res) => {
     })
 }
 
+// edit banner
 const editBanner = async (req, res) => {
     try {
         bannerHelpers.getOneBanner(req.query.id).then((data) => {
@@ -451,6 +487,7 @@ const editBanner = async (req, res) => {
     }
 }
 
+// edit is updated
 const postEditBanner = async (req, res) => {
     try {
         
@@ -465,6 +502,8 @@ const postEditBanner = async (req, res) => {
         console.log(error.message, ' error in admincontrollers + postEditBanner ');
     }
 }
+
+// delete banner
 const removeBanner = async (req, res) => {
     try {
         bannerHelpers.removeBanner(req.body).then((response) => {
@@ -475,6 +514,7 @@ const removeBanner = async (req, res) => {
     }
 }
 
+// sow offers
 const offers = async (req,res)=>{
     try {
         let products = await productHelpers.getAllProducts()
@@ -485,6 +525,7 @@ const offers = async (req,res)=>{
             console.log(error.message,' error in admincontrollers + offers ');
         }
 }
+// add new offers
 const addOffers = async (req,res)=>{
     try {
             offerHelpers.addOffer(req.body).then((response)=>{
@@ -523,7 +564,6 @@ module.exports = {
     getCancel,
     getOrderStatus,
     salesGraphs,
-    // getSales_Report,
     sales_Docs,
     geCoupons,
     addCoupons,

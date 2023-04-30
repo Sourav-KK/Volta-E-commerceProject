@@ -15,9 +15,10 @@
                     <div class="row">
 
                         <div class="col-md-6">
-                            <h4 style="text-align: center;vertical-align: middle;text-decoration: underline">Profile</h4> 
+                            <h4 style="text-align: center;vertical-align: middle;text-decoration: underline">Profile
+                            </h4>
                             <form action="/profileUser" method="get" enctype="multipart/form-data">
-                                    
+
                                 <table class="ui fixed table">
                                     <thead style="text-align: center;vertical-align: middle;">
                                         <tr>
@@ -37,45 +38,14 @@
                                     </thead>
                                 </table>
 
-                                <div style="text-align: center;vertical-align: middle;"> 
+                                <div style="text-align: center;vertical-align: middle;">
                                     <span>
                                         <button onclick="toggleReadonly()">Edit</button>
-                                        <button id="save" type="submit" hidden  >Save changes</button>
+                                        <button id="save" type="submit" hidden>Save changes</button>
                                     </span>
                                 </div>
                             </form>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <h4 style="text-align: center;vertical-align: middle;text-decoration: underline;">ADDRESS</h4> 
-                            <form action="/profileAdd" method="post">
-                                    
-                                <table class="ui fixed table">
-                                    <thead style="text-align: center;vertical-align: middle;">
-                                        <tr>
-                                            <th style="text-align: center;vertical-align: middle;">ADDRESS 1 :</th>
-                                            <td><input type="text"  placeholder="default" id="add1"> </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th style="text-align: center;vertical-align: middle;">ADDRESS 2 :</th>
-                                            <td><input type="text"  placeholder="primary" id="add2"></td>
-                                        </tr>
-
-                                        <tr>
-                                            <th style="text-align: center;vertical-align: middle;">ADDRESS 3 :</th>
-                                            <td><input type="text"  placeholder="secondary" id="add3"></td>
-                                        </tr>
-                                    </thead>
-                                </table>
-
-                                <div style="text-align: center;vertical-align: middle;"> 
-                                    <span>
-                                        <button onclick="toggle()">Edit</button>
-                                        <button id="saveAdd" type="submit" hidden> Save changes</button>
-                                    </span> 
-                                </div>
-                            </form>
-                        </div> -->
 
                     </div><!-- End .row -->
                 </div><!-- End .product-details-top -->
@@ -89,157 +59,28 @@
 <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
 
 
-
-<!-- Mobile Menu -->
-
-
-<!-- Sign in / Register Modal -->
-<div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="icon-close"></i></span>
-                </button>
-
-                <div class="form-box">
-                    <div class="form-tab">
-                        <ul class="nav nav-pills nav-fill" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin" role="tab"
-                                    aria-controls="signin" aria-selected="true">Sign In</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab"
-                                    aria-controls="register" aria-selected="false">Register</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="tab-content-5">
-                            <div class="tab-pane fade show active" id="signin" role="tabpanel"
-                                aria-labelledby="signin-tab">
-                                <form action="#">
-                                    <div class="form-group">
-                                        <label for="singin-email">Username or email address *</label>
-                                        <input type="text" class="form-control" id="singin-email" name="singin-email"
-                                            required>
-                                    </div><!-- End .form-group -->
-
-                                    <div class="form-group">
-                                        <label for="singin-password">Password *</label>
-                                        <input type="password" class="form-control" id="singin-password"
-                                            name="singin-password" required>
-                                    </div><!-- End .form-group -->
-
-                                    <div class="form-footer">
-                                        <button type="submit" class="btn btn-outline-primary-2">
-                                            <span>LOG IN</span>
-                                            <i class="icon-long-arrow-right"></i>
-                                        </button>
-
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="signin-remember">
-                                            <label class="custom-control-label" for="signin-remember">Remember
-                                                Me</label>
-                                        </div><!-- End .custom-checkbox -->
-
-                                        <a href="#" class="forgot-link">Forgot Your Password?</a>
-                                    </div><!-- End .form-footer -->
-                                </form>
-                                <div class="form-choice">
-                                    <p class="text-center">or sign in with</p>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <a href="#" class="btn btn-login btn-g">
-                                                <i class="icon-google"></i>
-                                                Login With Google
-                                            </a>
-                                        </div><!-- End .col-6 -->
-                                        <div class="col-sm-6">
-                                            <a href="#" class="btn btn-login btn-f">
-                                                <i class="icon-facebook-f"></i>
-                                                Login With Facebook
-                                            </a>
-                                        </div><!-- End .col-6 -->
-                                    </div><!-- End .row -->
-                                </div><!-- End .form-choice -->
-                            </div><!-- .End .tab-pane -->
-                            <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-                                <form action="#">
-                                    <div class="form-group">
-                                        <label for="register-email">Your email address *</label>
-                                        <input type="email" class="form-control" id="register-email"
-                                            name="register-email" required>
-                                    </div><!-- End .form-group -->
-
-                                    <div class="form-group">
-                                        <label for="register-password">Password *</label>
-                                        <input type="password" class="form-control" id="register-password"
-                                            name="register-password" required>
-                                    </div><!-- End .form-group -->
-
-                                    <div class="form-footer">
-                                        <button type="submit" class="btn btn-outline-primary-2">
-                                            <span>SIGN UP</span>
-                                            <i class="icon-long-arrow-right"></i>
-                                        </button>
-
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="register-policy"
-                                                required>
-                                            <label class="custom-control-label" for="register-policy">I agree to the <a
-                                                    href="#">privacy policy</a> *</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .form-footer -->
-                                </form>
-                                <div class="form-choice">
-                                    <p class="text-center">or sign in with</p>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <a href="#" class="btn btn-login btn-g">
-                                                <i class="icon-google"></i>
-                                                Login With Google
-                                            </a>
-                                        </div><!-- End .col-6 -->
-                                        <div class="col-sm-6">
-                                            <a href="#" class="btn btn-login  btn-f">
-                                                <i class="icon-facebook-f"></i>
-                                                Login With Facebook
-                                            </a>
-                                        </div><!-- End .col-6 -->
-                                    </div><!-- End .row -->
-                                </div><!-- End .form-choice -->
-                            </div><!-- .End .tab-pane -->
-                        </div><!-- End .tab-content -->
-                    </div><!-- End .form-tab -->
-                </div><!-- End .form-box -->
-            </div><!-- End .modal-body -->
-        </div><!-- End .modal-content -->
-    </div><!-- End .modal-dialog -->
-</div><!-- End .modal -->
-
 <script>
-function toggleReadonly() {
-  let name = document.getElementById(id="input1");
-  let email = document.getElementById(id="input2");
-  let mobile = document.getElementById(id="input3");
-  let save = document.getElementById(id="save");
+    function toggleReadonly() {
+        let name = document.getElementById(id = "input1");
+        let email = document.getElementById(id = "input2");
+        let mobile = document.getElementById(id = "input3");
+        let save = document.getElementById(id = "save");
 
 
-  input1.readOnly = !input1.readOnly;
-  input2.readOnly = !input2.readOnly;
-  input3.readOnly = !input3.readOnly;
-  save.hidden = !save.hidden
-}
+        input1.readOnly = !input1.readOnly;
+        input2.readOnly = !input2.readOnly;
+        input3.readOnly = !input3.readOnly;
+        save.hidden = !save.hidden
+    }
 
-function toggle() {
-    let add1 = document.getElementById(id="add1");
-    let add2 = document.getElementById(id="add2");
-    let add3 = document.getElementById(id="add3");
-    // let name = document.getElementById(id="add");
+    function toggle() {
+        let add1 = document.getElementById(id = "add1");
+        let add2 = document.getElementById(id = "add2");
+        let add3 = document.getElementById(id = "add3");
 
-    add1.readOnly = !add1.readOnly;
-    add2.readOnly = !add2.readOnly;
-    add3.readOnly = !add3.readOnly;
-    saveAdd.hidden = !saveAdd.hidden
-}
+        add1.readOnly = !add1.readOnly;
+        add2.readOnly = !add2.readOnly;
+        add3.readOnly = !add3.readOnly;
+        saveAdd.hidden = !saveAdd.hidden
+    }
 </script>

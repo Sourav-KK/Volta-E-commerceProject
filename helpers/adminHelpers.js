@@ -29,6 +29,8 @@ module.exports = {
             }
         })
     },
+
+    // llst of all user status
     getAllUsers: () => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -39,10 +41,12 @@ module.exports = {
             }
         })
     },
+
+    // details of one user
     oneUser: (userId) => {
         return new Promise(async (resolve, reject) => {
             try {
-                db.users.findOne({_id: new ObjectId(userId)}).then((response)=>{
+                db.users.findOne({ _id: new ObjectId(userId) }).then((response) => {
                     resolve(response)
                 })
             } catch (error) {
@@ -50,20 +54,24 @@ module.exports = {
             }
         })
     },
-    getBlockOneUser:(data)=>{
+
+    // block one user
+    getBlockOneUser: (data) => {
         return new Promise(async (resolve, reject) => {
             try {
-                let blockedUser = await db.users.updateOne({_id:data},{$set:{blocked:true}})
+                let blockedUser = await db.users.updateOne({ _id: data }, { $set: { blocked: true } })
                 resolve(blockedUser)
             } catch (error) {
-                console.log(error.message," error in blocking user in adminhelpers");
+                console.log(error.message, " error in blocking user in adminhelpers");
             }
         })
     },
-    getUnblockUser:(data)=>{
-        return new Promise(async(resolve, reject) => {
+
+    // unblock one user
+    getUnblockUser: (data) => {
+        return new Promise(async (resolve, reject) => {
             try {
-                let unblockUser = await db.users.updateOne({_id:data},{$set:{blocked:false}})
+                let unblockUser = await db.users.updateOne({ _id: data }, { $set: { blocked: false } })
                 resolve(unblockUser)
             } catch (error) {
                 console.log(error.message, ' err in unblocking user in adminhelpers');
@@ -71,49 +79,51 @@ module.exports = {
         })
     },
 
-    getOrders:()=>{
-        return new Promise(async(resolve, reject) => {
+    // get all orders
+    getOrders: () => {
+        return new Promise(async (resolve, reject) => {
             try {
                 let allOrders = await db.order.find({})
-                    resolve(allOrders.reverse())
+                resolve(allOrders.reverse())
             } catch (error) {
-                console.log(error.message,' error in adminHelpers + getOrders');
+                console.log(error.message, ' error in adminHelpers + getOrders');
             }
         })
     },
 
-    getApprove:(orderId)=>{
-    return new Promise(async(resolve, reject) => {
-        try {
-            let approve = await db.order.updateOne({_id:orderId},{$set:{approval:true}})
-            resolve(approve)
-        } catch (error) {
-            console.log(error.message,' error in adminHelpers + getApprove');
-        }
-    })
-    },
-
-    getCancel:(orderId)=>{
-        return new Promise(async(resolve, reject) => {
+    // give approval
+    getApprove: (orderId) => {
+        return new Promise(async (resolve, reject) => {
             try {
-                let approve = await db.order.updateOne({_id:orderId},{$set:{approval:false}})
+                let approve = await db.order.updateOne({ _id: orderId }, { $set: { approval: true } })
                 resolve(approve)
             } catch (error) {
-                console.log(error.message,' error in adminHelpers + getCancel');
+                console.log(error.message, ' error in adminHelpers + getApprove');
             }
         })
     },
 
-        OrderStatus:(orderId)=>{
-        return new Promise(async(resolve, reject) => {
+    // cancel order
+    getCancel: (orderId) => {
+        return new Promise(async (resolve, reject) => {
             try {
-             let OrderStatus = await db.order.updateOne({_id:orderId},{$inc:{orderStatus:1}})
-             resolve(OrderStatus)
+                let approve = await db.order.updateOne({ _id: orderId }, { $set: { approval: false } })
+                resolve(approve)
             } catch (error) {
-                console.log(error.message,' error in adminHelpers + OrderStatus');
+                console.log(error.message, ' error in adminHelpers + getCancel');
             }
         })
-    }, 
-    
-   
+    },
+
+    // change order status
+    OrderStatus: (orderId) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let OrderStatus = await db.order.updateOne({ _id: orderId }, { $inc: { orderStatus: 1 } })
+                resolve(OrderStatus)
+            } catch (error) {
+                console.log(error.message, ' error in adminHelpers + OrderStatus');
+            }
+        })
+    },
 }

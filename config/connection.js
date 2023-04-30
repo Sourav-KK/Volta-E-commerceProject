@@ -1,9 +1,5 @@
-const { name } = require('ejs');
-const { text } = require('express');
 const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
-const { email } = require('./adminDetails');
-const adminDetails = require('./adminDetails');
 const db = mongoose.createConnection('mongodb://127.0.0.1:27017/volta')
 
 db.on('error', (err) => {
@@ -92,9 +88,6 @@ const orderSchema = new mongoose.Schema({
         status: String,
         total: Number,
         products: mongoose.Schema.Types.Mixed
-        // paymentStatus: String,
-        // totalQuantity: Number,
-        // totalPrice: Number,
     }
 })
 
@@ -134,5 +127,4 @@ module.exports = {
     coupon: db.model('coupon', couponSchema),
     wallet: db.model('wallet', walletSchema),
     banner: db.model('banner', bannerSchema)
-
 }

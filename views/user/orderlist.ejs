@@ -21,9 +21,7 @@
                             <tr>
                                 <th style="text-align: center;vertical-align: middle;">No.</th>
                                 <th style="text-align: center;vertical-align: middle;">Date</th>
-                                <!-- <th style="text-align: center;vertical-align: middle;">Name</th> -->
                                 <th style="text-align: center;vertical-align: middle;">Ship to</th>
-                                <!-- <th style="text-align: center;vertical-align: middle;">Quantity</th> -->
                                 <th style="text-align: center;vertical-align: middle;">Details</th>
                                 <th style="text-align: center;vertical-align: middle;">Amount &
                                     <p>Payment method</p>
@@ -41,7 +39,6 @@
                                     <td class="date col-1" style="text-align: center;vertical-align: middle;">
                                         <%=orders[i]?.date?.toDateString()%>
                                     </td>
-                                    <!-- <td class="name" style="text-align: center;vertical-align: middle;"></td> -->
                                     <td class="address col-3" style="text-align: center;vertical-align: middle;">
                                         <%=orders[i]?.deliveryDetails?.name%>, <%=orders[i]?.deliveryDetails?.address%>,
                                                 <%=orders[i]?.deliveryDetails?.state%>,
@@ -88,8 +85,6 @@
                                             </a>
                                         <%}else if(orders[i]?.orderStatus==2 ){%>
                                             <p class="font-weight-bold text-info">Delivered </p> 
-                                            <!-- <a type = "button" href="" onclick=" return confirm('Are you sure you want to return your order ????')"
-                                            class="btn btn-danger btn-sm btn-icon-text btn-icon-prepend"class="btn btn-danger btn-sm btn-icon-text btn-icon-prepend" title="Click to return product">Return product</a> -->
                                         <%}else{ %>
                                             <p class="font-weight-bold text-danger">
                                                 Cancelled</p>

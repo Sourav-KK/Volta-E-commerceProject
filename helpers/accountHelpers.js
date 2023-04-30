@@ -20,6 +20,8 @@ module.exports = {
             }
         })
     },
+
+    // address of one user
     getAddresses: (userId) => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -31,6 +33,8 @@ module.exports = {
             }
         })
     },
+
+    // one address of user
     getOneAddress: (id, userId) => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -52,6 +56,8 @@ module.exports = {
             }
         })
     },
+
+    // add new address
     addAddress: (data, userId) => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -73,6 +79,8 @@ module.exports = {
             }
         })
     },
+
+    // edit and update address 
     updateAddress: (userId, data) => {
         // console.log(data.addId, ' data in accountHelpers + updateAddress');
         return new Promise(async (resolve, reject) => {
@@ -93,6 +101,8 @@ module.exports = {
             }
         })
     },
+
+    // remove one address
     removeAddress: (id, userId) => {
         return new Promise(async (resolve, reject) => {
             try {

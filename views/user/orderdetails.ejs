@@ -27,8 +27,6 @@
                                                 alt="Productimage">
                                             </td>
                                             <td>
-                                                <!-- <a href="#"
-                                                    class="list-group-item list-group-item-action flex-column align-items-start"> -->
                                                 <div class="d-flex w-100 justify-content-between">
                                                     <h5 class="mb-1">
                                                         <%=product[i]?.products.name %>
@@ -60,21 +58,23 @@
                             </div>
                             <% } %>
 
-                                <!-- for fun -->
-                                
                                 <div class="container">
                                     <% for (let i=0; i < product?.length; i++) { %>
-                                    <div class="card">
-                                        <figure>
-                                            <img src=/productImages/<%=product[i]?.products?._id %>0.jpg alt="Image">
-                                        </figure>
-                                        <div class="card-content">
-                                            <h3>Name: <%=product[i]?.products?.name %></h3>
-                                            <p>Quantity: <%=product[i]?.qty %></p>
-                                            <p>Price: <%=product[i]?.products?.marketPrice*product[i]?.qty%></p>
+                                        <div class="card">
+                                            <figure>
+                                                <img src=/productImages/<%=product[i]?.products?._id %>0.jpg
+                                                alt="Image">
+                                            </figure>
+                                            <div class="card-content">
+                                                <h3>Name: <%=product[i]?.products?.name %>
+                                                </h3>
+                                                <p>Quantity: <%=product[i]?.qty %>
+                                                </p>
+                                                <p>Price: <%=product[i]?.products?.marketPrice*product[i]?.qty%>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <% } %>
+                                        <% } %>
                                 </div>
                                 <!-- for fun -->
 
@@ -102,15 +102,13 @@
                 if (response?.status) {
                     alert('success')
                     location.reload()
-                }else {
+                } else {
                     alert(' Error in returning product')
                     location.reload()
                 }
             }
         })
     }
-
-
 </script>
 
 <style>

@@ -1,72 +1,71 @@
 <div class="page-wrapper">
-    <main class="main">
-      <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-        <div class="container d-flex align-items-center">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/account">Account</a></li>
-            <li class="breadcrumb-item"><a href="/addAddress">Add new Address</a></li>
-          </ol>
-        </div><!-- End .container -->
-      </nav><!-- End .breadcrumb-nav -->
-  
-      <div class="page-content">
-        <div class="dashboard">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-8 col-lg-9" >
-          
-                <form  action="#" id="addNewAddress-formm">
-                    <div class="row">
-                        <div class="col-sm-6">
-                          <label>Street Address * <span id="streetAddressError" class="text-danger"></span></label>
-                            <input type="text" class="form-control" id="streetAddress" name="streetAddress" >
-                        </div>
-                      
-                        <div class="col-sm-6">
-                            <label>State * <span id="stateError" class="text-danger"></span></label>
-                            <select class="form-control" name="state" id="state" required>
-                              <option hidden disabled selected> Select--</option>
-                              <option value="Andhra Pradesh">Andhra Pradesh</option>
-                              <option value="Karnataka">Karnataka</option>
-                              <option value="Kerala">Kerala</option>
-                              <option value="Tamil Nadu">Tamil Nadu</option>
-                              <option value="Telangana">Telangana</option>
-                          </select>
-                                <!-- <input type="text" class="form-control" name="state" > -->
-                        </div>
-                      
-                        <div class="col-sm-6">
-                            <label>Country *<span id="countryError" class="text-danger"></span></label>
-                                <input type="text" class="form-control" name="country" value="India" readonly >
-                        </div>
+  <main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+      <div class="container d-flex align-items-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/account">Account</a></li>
+          <li class="breadcrumb-item"><a href="/addAddress">Add new Address</a></li>
+        </ol>
+      </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
 
-                        <div class="col-sm-6">
-                            <label>Pincode *<span id="PincodeError" class="text-danger"></span></label>
-                                <input type="tel" class="form-control" id="pincode" name="pincode" >
-                        </div>
+    <div class="page-content">
+      <div class="dashboard">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-lg-9">
 
-                        <div class="col-sm-6">
-                            <button type="submit" class="btn btn-outline-primary-2">
-                                <span>SAVE CHANGES</span>
-                                <i class="icon-long-arrow-right"></i>
-                            </button>
-                        </div>   
-                    </div>     
-                </form>
+              <form action="#" id="addNewAddress-formm">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label>Street Address * <span id="streetAddressError" class="text-danger"></span></label>
+                    <input type="text" class="form-control" id="streetAddress" name="streetAddress">
+                  </div>
 
-              </div>
+                  <div class="col-sm-6">
+                    <label>State * <span id="stateError" class="text-danger"></span></label>
+                    <select class="form-control" name="state" id="state" required>
+                      <option hidden disabled selected> Select--</option>
+                      <option value="Andhra Pradesh">Andhra Pradesh</option>
+                      <option value="Karnataka">Karnataka</option>
+                      <option value="Kerala">Kerala</option>
+                      <option value="Tamil Nadu">Tamil Nadu</option>
+                      <option value="Telangana">Telangana</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Country *<span id="countryError" class="text-danger"></span></label>
+                    <input type="text" class="form-control" name="country" value="India" readonly>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>Pincode *<span id="PincodeError" class="text-danger"></span></label>
+                    <input type="tel" class="form-control" id="pincode" name="pincode">
+                  </div>
+
+                  <div class="col-sm-6">
+                    <button type="submit" class="btn btn-outline-primary-2">
+                      <span>SAVE CHANGES</span>
+                      <i class="icon-long-arrow-right"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+
             </div>
           </div>
-        </div> 
+        </div>
       </div>
-    </main>
-  </div><!-- End .page-wrapper -->
-  <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
- 
-  
+    </div>
+  </main>
+</div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+
 <script>
-  
+
   $("#addNewAddress-formm").submit((e) => {
     e.preventDefault()
     const streetAddress = $('#streetAddress').val().trim().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');;
@@ -78,50 +77,50 @@
     $('#PincodeError').text('');
     var flag = 1
 
-    if (streetAddress=='') {
+    if (streetAddress == '') {
       flag = 2
       document.getElementById('streetAddressError').textContent = 'Please enter a valid street address.';
       return false
-    } else if (streetAddress.length <3) {
-        flag = 2
-        document.getElementById('streetAddressError').textContent = 'Please provide more information';
-        return false
-      }
-    
+    } else if (streetAddress.length < 3) {
+      flag = 2
+      document.getElementById('streetAddressError').textContent = 'Please provide more information';
+      return false
+    }
+
     if (state === ' ') {
       flag = 2
       document.getElementById('stateError').textContent = 'This field is required.';
       return false
     }
-    
-    if (pincode==' ') {
+
+    if (pincode == ' ') {
       flag = 2
       document.getElementById('PincodeError').textContent = 'This field is required.';
       return false
       // errors.pincode = 'Please enter a valid pincode.';
-    }else if (!/^\d{6}$/.test(pincode)) {
+    } else if (!/^\d{6}$/.test(pincode)) {
       flag = 2
-        document.getElementById('PincodeError').textContent = 'Provide a valid pincode.';
-        return false
-      }
+      document.getElementById('PincodeError').textContent = 'Provide a valid pincode.';
+      return false
+    }
 
-    if(flag == 1){
+    if (flag == 1) {
       $.ajax({
-              url: '/addAddress',
-              method: 'post',
-              data: $('#addNewAddress-formm').serialize(),//serialize is used to get every data in the form
-              success: (response) => {
-                  if (response.status) {
-                      alert('successfully updated')
-                      window.location.href = "/account"
-                  } else {
-                      alert( response.message,'')
-                      window.location.href = "/account"
-                  }
-              }
-          })
-      }else {
-  e.currentTarget.submit();
-}
+        url: '/addAddress',
+        method: 'post',
+        data: $('#addNewAddress-formm').serialize(),//serialize is used to get every data in the form
+        success: (response) => {
+          if (response.status) {
+            alert('successfully updated')
+            window.location.href = "/account"
+          } else {
+            alert(response.message, '')
+            window.location.href = "/account"
+          }
+        }
       })
-       </script>
+    } else {
+      e.currentTarget.submit();
+    }
+  })
+</script>

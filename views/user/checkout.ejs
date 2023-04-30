@@ -1,5 +1,5 @@
 <script>
-     function openList1() {
+    function openList1() {
         let list = document.getElementById("list1");
 
         if (list.style.display == "none") {
@@ -41,19 +41,6 @@
         <div class="page-content mt-2">
             <div class="checkout">
                 <div class="container">
-                    <!-- <div class="checkout-discount">
-                            <form action="#" id="couponForm">
-                                <label for="checkout-discount-input" class="text-truncate" >Have a coupon? <span>Click here
-                                        to enter your code</span>
-                                </label>
-                                <input type="text" name="couponEnter" class="form-control" required id="checkout-discount-input">
-
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-primary-2" type="submit"><i
-                                            class="icon-long-arrow-right"></i></button>
-                                </div>
-                            </form>
-                        </div> -->
                     <form action="#" id="checkout-formm">
                         <div class="row">
 
@@ -68,10 +55,6 @@
                                             <input type="text" name="name" value="<%=name  %> " class="form-control"
                                                 required>
                                         </div><!-- End .col-sm-6 -->
-                                        <!-- <div class="col-sm-6">
-                                            <label>Last Name *</label>
-                                            <input type="text" class="form-control" required>
-                                        </div> -->
                                     </div><!-- End row-->
 
                                     <label>Street address *<span class="font-weight-light"> (Note : The address entered
@@ -80,8 +63,6 @@
                                     <input type="text" name="address" class="form-control"
                                         placeholder="House number and Street name"
                                         value="<%=oneAddress?.address[0]?.streetAddress%>" required>
-                                    <!-- <input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..."
-                                        required> -->
 
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -97,7 +78,6 @@
                                                 <option value="Tamil Nadu">Tamil Nadu</option>
                                                 <option value="Telangana">Telangana</option>
                                             </select>
-                                            <!-- <input type="text" name="state" class="form-control" required> -->
                                         </div><!-- End .col-sm-6 -->
 
                                         <div class="col-sm-6">
@@ -126,7 +106,6 @@
                                     <input type="text" name="userId" value="<%=user%>" hidden>
                                     <input type="text" name="approval" value="true" hidden>
                                     <input type="tel" name="couponDiscount" value="tony()" hidden>
-                                    <!-- <input type="tel"  name="orderStatus" value="0" hidden> -->
 
                                     <div class="row">
                                         <p onclick="openList1()">Click to choose address</p>
@@ -156,21 +135,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="checkout-create-acc">
-                                        <label class="custom-control-label" for="checkout-create-acc">Create an
-                                            account?</label>
-                                    </div> -->
 
-                                    <!-- <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="checkout-diff-address">
-                                        <label class="custom-control-label" for="checkout-diff-address">Ship to a different
-                                            address?</label>
-                                    </div> -->
-
-                                    <!-- <label>Order notes (optional)</label>
-                                    <textarea class="form-control" cols="30" rows="4"
-                                        placeholder="Notes about your order, e.g. special notes for delivery"></textarea> -->
                                 </div><!-- End .col-lg-9 -->
                                 <%} %>
                                     <aside class="col-lg-3">
@@ -186,15 +151,6 @@
                                                 </thead>
 
                                                 <tbody>
-                                                    <!-- <tr>
-                                                    <td><a href="#">Beige knitted elastic runner shoes</a></td>
-                                                    <td>$84.00</td>
-                                                </tr> -->
-
-                                                    <!-- <tr>
-                                                    <td><a href="#">Blue utility pinafore denimdress</a></td>
-                                                    <td>$76,00</td>
-                                                </tr> -->
                                                     <tr class="summary-subtotal">
                                                         <td>Subtotal:</td>
                                                         <td>₹<%=total %>
@@ -239,44 +195,6 @@
                                             </table>
 
                                             <div class="accordion-summary" id="accordion-payment">
-                                                <!-- <div class="card">
-                                                <div class="card-header" id="heading-1">
-                                                    <h2 class="card-title">
-                                                        <a role="button" data-toggle="collapse" href="#collapse-1"
-                                                            aria-expanded="true" aria-controls="collapse-1">
-                                                            Direct bank transfer
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                                <div id="collapse-1" class="collapse show" aria-labelledby="heading-1"
-                                                    data-parent="#accordion-payment">
-                                                    <div class="card-body">
-                                                        Make your payment directly into our bank account. Please use your
-                                                        Order ID as the payment reference. Your order will not be shipped
-                                                        until the funds have cleared in our account.
-                                                    </div>
-                                                </div>
-                                            </div> -->
-
-                                                <!-- <div class="card">
-                                                <div class="card-header" id="heading-2">
-                                                    <h2 class="card-title">
-                                                        <a class="collapsed" role="button" data-toggle="collapse"
-                                                            href="#collapse-2" aria-expanded="false"
-                                                            aria-controls="collapse-2">
-                                                            Check payments
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                                <div id="collapse-2" class="collapse" aria-labelledby="heading-2"
-                                                    data-parent="#accordion-payment">
-                                                    <div class="card-body">
-                                                        Ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
-                                                        Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
-                                                    </div>
-                                                </div>
-                                            </div> -->
-
                                                 <div class="card">
                                                     <div class="card-header" id="heading-3">
                                                         <h2 class="card-title">
@@ -285,19 +203,8 @@
                                                                 <input type="radio" name="paymentMethod" value="COD"
                                                                     required onclick="display('none')">COD
                                                             </label>
-                                                            <!-- <a class="collapsed" role="button" name="paymentMethod" data-toggle="collapse"
-                                                            href="#collapse-3" aria-expanded="false"
-                                                            aria-controls="collapse-3">
-                                                            Cash on delivery
-                                                        </a> -->
                                                         </h2>
                                                     </div>
-                                                    <!-- <div id="collapse-3" class="collapse" aria-labelledby="heading-3"
-                                                    data-parent="#accordion-payment">
-                                                    <div class="card-body">Quisque volutpat mattis eros. Lorem ipsum dolor
-                                                        sit amet, consectetuer adipiscing elit. Donec odio.
-                                                    </div>
-                                                </div> -->
                                                 </div><!-- End card-->
 
                                                 <div class="card">
@@ -308,21 +215,8 @@
                                                                     onclick="display('')"> PayPal
                                                             </label>
                                                             <div id="paypal" style="display: none;"></div>
-                                                            <!-- <a class="collapsed" role="button" name="paymentMethod" data-toggle="collapse"
-                                                            href="#collapse-4" aria-expanded="false"
-                                                            aria-controls="collapse-4">
-                                                            PayPal 
-                                                        </a> -->
                                                         </h2>
                                                     </div>
-                                                    <!-- <div id="collapse-4" class="collapse" aria-labelledby="heading-4"
-                                                    data-parent="#accordion-payment">
-                                                    <div class="card-body">
-                                                        Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non,
-                                                        semper suscipit, posuere a, pede. Donec nec justo eget felis
-                                                        facilisis fermentum.
-                                                    </div>
-                                                </div> -->
                                                 </div><!-- End card-->
 
                                                 <!-- RAzorpay -->
@@ -368,18 +262,13 @@
                                             Place Order
                                             <!-- <span class="btn-hover-text">Proceed to Checkout</span> -->
                                         </button>
-
                                     </aside><!-- End .col-lg-3 -->
                         </div><!-- End .row -->
                     </form>
                 </div><!-- End .container -->
             </div><!-- End .checkout -->
         </div><!-- End .page-content -->
-
-
     </main><!-- End .main -->
-
-
 </div><!-- End .page-wrapper -->
 
 <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
@@ -407,7 +296,6 @@
             }
         })
     })
-    // window.onload = addText();
 
     function couponValidator(newCode, total) {
         code = document.getElementById("code").value.trim()
@@ -491,7 +379,7 @@
             }
         }).render('#paypal');
     }
-   
+
     function changeAddress(addressId) {
         $.ajax({
             url: '/checkout?id=addressId',

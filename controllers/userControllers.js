@@ -1,11 +1,10 @@
-require('dotenv').config()
-
 const userHelpers = require('../helpers/userHelpers');
 const productHelpers = require('../helpers/productHelpers');
 const accountHelpers = require('../helpers/accountHelpers');
 const bannerHelpers = require('../helpers/bannerHelpers');
 
 const db = require('../config/connection');
+// currency coversion
 const { Convert } = require("easy-currencies");
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -57,6 +56,7 @@ const getUserLogin = async function (req, res, next) {
     res.render('user/userLogin', { nav: false, footer: false })
 }
 
+// verify login credential
 const postUserLogin = async (req, res, next) => {
     userHelpers.dologin(req.body).then((response) => {
         if (response.status) {
@@ -68,7 +68,8 @@ const postUserLogin = async (req, res, next) => {
         }
     })
 }
-//signup
+
+// signup
 const getUserSignup = async function (req, res, next) {
     if (req.session.loggedIn) {
         res.redirect('/home')
@@ -88,12 +89,14 @@ const postUserSignup = async function (req, res, next) {
     })
 }
 
+// user logout
 const getUserlogout = async (req, res) => {
         req.session.loggedIn = false
         req.session.user._id = null 
         res.redirect('/login')
 }
 
+//  render user home
 const getUserHome = async (req, res, next) => {
     let user = req.session.user._id
     let use = req.session.loggedIn
@@ -103,7 +106,7 @@ const getUserHome = async (req, res, next) => {
     })
 }
 
-//get One product
+// get One product
 const getProduct = async (req, res, next)=> {
     let cartCount =  await userHelpers.getCartCount(req.session.user._id)
     const id = req.query.id
@@ -121,6 +124,7 @@ const getProduct = async (req, res, next)=> {
 const getOTPLogin = async (req, res, next)=> {
     res.render('user/OTPLogin', { nav: false, footer: false })
 }
+
 // Posting mobilenumber
 const postOTPLogin = async (req, res) => {
     let num = req.body.number
@@ -140,11 +144,13 @@ const postOTPLogin = async (req, res) => {
         res.redirect('/otplogin')
     }
 }
-//getting OTP page
+
+// getting OTP page
 const getEnterOtp = async (req, res) => {
     // console.log(req.session.number, ' phone num passed from userControllers + postOtpLogin');
     res.render('user/enterotp', { nav: false, footer: false })
 }
+
 // posting otp code
 const postOTPVerify = async (req, res) => {
     const otp = req.body.otp
@@ -171,6 +177,7 @@ const getCart = async (req, res) => {
         res.render('user/cart', { nav: true, footer: true, data, total, userId, use,firstOrder, "name": req.session.user.name, cartCount })
 }
 
+// products are added to cart
 const getToAddCart = async (req, res) => {
     const user = req.session.user._id
     const id = req.query.id
@@ -179,6 +186,7 @@ const getToAddCart = async (req, res) => {
     })
 }
 
+// change no.of items
 const postChangeProductQuantity = async (req, res) => {    
     userHelpers.changeProductQuantity(req.body).then(async (response) => {
         response.total = await userHelpers.getTotalAmnt(req.body.userId)
@@ -186,12 +194,14 @@ const postChangeProductQuantity = async (req, res) => {
     })
 }
 
+//  remove item from product
 const postRemoveCartProduct = async (req, res) => {
     await userHelpers.removeCartProduct(req.body).then((response) => {
         res.json(response)
     })
 }
 
+// render chekout page
 const getCheckout = async (req, res) => {
     let use = req.session.loggedIn
     let user = req.session.user._id
@@ -216,6 +226,7 @@ const getCheckout = async (req, res) => {
     }
 }
 
+// coupon is validated
 const checkCoupon = async (req,res)=>{
     try {
         let code = req.body.couponEnter
@@ -227,6 +238,7 @@ const checkCoupon = async (req,res)=>{
     }
 }
 
+// 
 const couponValidator = async (req,res)=>{
     try {
         let code = req.query.code
@@ -244,7 +256,7 @@ const couponValidator = async (req,res)=>{
     }
 }
 
-
+// chekeout is done here
 const postCheckout = async (req, res) => {
     let products = await userHelpers.getCartProductList(req.session.user)
 
@@ -269,7 +281,6 @@ const postCheckout = async (req, res) => {
 }
 
 const paypalOrder = async (req,res)=>{
-    // console.log(req.body,'req.body in + userControllers + paypalOrder');
     let total = req.body.total
     total = parseInt(total)
 
@@ -320,10 +331,12 @@ const paypalSuccess = async (req,res)=>{
     // res.render('user/success', { nav, footer, use, "name": req.session.user.name })
 }
 
+// render success page
 const getSuccess = async (req, res) => {
     res.render('user/success', {  })
 }
 
+// render all oder for a user
 const getOrderlist = async (req, res) => {
         let use = req.session.loggedIn
         let orders = await userHelpers.getUserOrder(req.session.user._id)
@@ -332,6 +345,7 @@ const getOrderlist = async (req, res) => {
         res.render('user/orderlist', { nav, footer, use, orders, currDate, "name": req.session.user.name, cartCount })
 }
 
+// cancel one order
 const getCancelorder = async (req, res) => {
     const id = req.query.id
     await userHelpers.getCancelorder(id).then((response) => {
@@ -339,11 +353,13 @@ const getCancelorder = async (req, res) => {
     })
 }
 
+// 
 const postRemoveOrderProduct = async (req, res) => {
     await userHelpers.removeOrderProduct(id)
         res.redirect('/orderlist')
 }
 
+// details of one order
 const getOrderDetails = async (req, res) => {
     let use = req.session.loggedIn
     const id = req.query.id
@@ -353,7 +369,7 @@ const getOrderDetails = async (req, res) => {
     res.render('user/orderdetails', { nav, footer, use, orneOrder, "name": req.session.user.name, product, cartCount })
 }
 
-
+// returns one product 
 const returnItem = async (req,res)=>{
     try {
         // console.log(req.body,' req.body in + userControllers + returnItem');
@@ -394,6 +410,7 @@ const postUpdateAccount = async (req,res)=>{
             res.json(response)
     })
 }
+
 // add new address
 const addAddress = async (req,res)=>{
     try {
@@ -405,6 +422,7 @@ const addAddress = async (req,res)=>{
     }
 }
 
+// address is added
 const postaddAddress = async (req,res)=>{
     try {
         const userId = req.session.user._id
@@ -428,6 +446,7 @@ const postaddAddress = async (req,res)=>{
     }
 }
 
+// remove one address
 const removeAddress = async (req,res)=>{
     try {
         const userId = req.session.user._id

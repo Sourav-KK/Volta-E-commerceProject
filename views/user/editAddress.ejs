@@ -1,72 +1,75 @@
 <div class="page-wrapper">
-    <main class="main">
-      <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-        <div class="container d-flex align-items-center">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/home">Home</a></li>
-            <li class="breadcrumb-item"><a href="/account">Account</a></li>
-            <li class="breadcrumb-item"><a >Edit Address</a></li>
-          </ol>
-        </div><!-- End .container -->
-      </nav><!-- End .breadcrumb-nav -->
-  
-      <div class="page-content">
-        <div class="dashboard">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-8 col-lg-9" >
-          <% if(oneAdd){ %>
-                <form  action="#" id="editAddress-formm">
-                    <div class="row">
-                        <div class="col-sm-6">
-                          <label>Street Address *<span id="streetAddressError" class="text-danger"></span></label>
-                            <input type="text" class="form-control" name="streetAddress" id="streetAddress" value="<%=oneAdd?.streetAddress%>">
-                        </div>
-                      
-                        <div class="col-sm-6">
-                            <label >State *<span id="stateError" class="text-danger"></span></label>
-                            <select class="form-control" name="state" id="state" required>
-                              <option selected value="<%=oneAdd?.state%>"> <%=oneAdd?.state%></option>
-                              <option value="Andhra Pradesh">Andhra Pradesh</option>
-                              <option value="Karnataka">Karnataka</option>
-                              <option value="Kerala">Kerala</option>
-                              <option value="Tamil Nadu">Tamil Nadu</option>
-                              <option value="Telangana">Telangana</option>
-                          </select>
-                        </div>
-                      
-                        <div class="col-sm-6">
-                            <label>Country *<span id="countryError" class="text-danger"></span></label>
-                                <input type="text" class="form-control" name="country" id="country" value="India" readonly>
-                        </div>
+  <main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+      <div class="container d-flex align-items-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/home">Home</a></li>
+          <li class="breadcrumb-item"><a href="/account">Account</a></li>
+          <li class="breadcrumb-item"><a>Edit Address</a></li>
+        </ol>
+      </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
 
-                        <div class="col-sm-6">
-                            <label>Pincode *<span id="pincodeError" class="text-danger"></span></label>
-                                <input type="tel" class="form-control" name="pincode" id="pincode" value="<%=oneAdd?.pincode %>">
-                                <input type="text" name="addId" value="<%=oneAdd?._id %>" hidden>
-                        </div>
+    <div class="page-content">
+      <div class="dashboard">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-lg-9">
+              <% if(oneAdd){ %>
+                <form action="#" id="editAddress-formm">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label>Street Address *<span id="streetAddressError" class="text-danger"></span></label>
+                      <input type="text" class="form-control" name="streetAddress" id="streetAddress"
+                        value="<%=oneAdd?.streetAddress%>">
+                    </div>
 
-                        <div class="col-sm-6">
-                            <button type="submit" class="btn btn-outline-primary-2">
-                                <span>SAVE CHANGES</span>
-                                <i class="icon-long-arrow-right"></i>
-                            </button>
-                        </div>   
-                    </div>     
+                    <div class="col-sm-6">
+                      <label>State *<span id="stateError" class="text-danger"></span></label>
+                      <select class="form-control" name="state" id="state" required>
+                        <option selected value="<%=oneAdd?.state%>">
+                          <%=oneAdd?.state%>
+                        </option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                      </select>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <label>Country *<span id="countryError" class="text-danger"></span></label>
+                      <input type="text" class="form-control" name="country" id="country" value="India" readonly>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <label>Pincode *<span id="pincodeError" class="text-danger"></span></label>
+                      <input type="tel" class="form-control" name="pincode" id="pincode" value="<%=oneAdd?.pincode %>">
+                      <input type="text" name="addId" value="<%=oneAdd?._id %>" hidden>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <button type="submit" class="btn btn-outline-primary-2">
+                        <span>SAVE CHANGES</span>
+                        <i class="icon-long-arrow-right"></i>
+                      </button>
+                    </div>
+                  </div>
                 </form>
-            <% } %>
-              </div>
+                <% } %>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
-    </main>
-  </div><!-- End .page-wrapper -->
-  <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
- 
-  
-  <script>
-  
+    </div>
+  </main>
+</div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+
+<script>
+
   $("#editAddress-formm").submit((e) => {
     console.log('hy');
     e.preventDefault()
@@ -84,14 +87,14 @@
     $('stateError').text('')
     $('countryError').text('')
     $('pincodeErr').text('')
-    
+
     var flag = 1
 
     if (streetAddress == " ") {
-    $('#streetAddressError').text('This field is required');
+      $('#streetAddressError').text('This field is required');
       flag = 2
       return false
-    }else if (streetAddress.length < 3){
+    } else if (streetAddress.length < 3) {
       $('#streetAddressError').text('Name should have minimum 3 characters ');
       flag = 2
       return false
@@ -104,36 +107,36 @@
     }
 
     if (country == '') {
-      $('#countryError').text('This field is required');mobileErrorShown = true;
+      $('#countryError').text('This field is required'); mobileErrorShown = true;
       flag = 2
       return false
     }
 
     if (Pincode == '') {
-      $('#pincodeErr').text('This field is required');mobileErrorShown = true;
+      $('#pincodeErr').text('This field is required'); mobileErrorShown = true;
       flag = 2
       return false
-    }else if (!/^\d{6}$/.test(Pincode)){
-      $('#pincodeErr').text('Please enter a valid Email address ');mobileErrorShown = true;
+    } else if (!/^\d{6}$/.test(Pincode)) {
+      $('#pincodeErr').text('Please enter a valid Email address '); mobileErrorShown = true;
       flag = 2
       return false
     }
-    if (flag ==1) {
-        $.ajax({
-          url: '/edit-Address',
-          data: $('#editAddress-formm').serialize(),//serialize is used to get every data in the form
-          method: 'post',
-          success: (response) => {
-            if (response?.status) {
-              alert('successfully updated')
-              window.location.href = "/account"
-            } else {
-              alert( response?.message,'')
-              window.location.href = "/account"
-            }
+    if (flag == 1) {
+      $.ajax({
+        url: '/edit-Address',
+        data: $('#editAddress-formm').serialize(),//serialize is used to get every data in the form
+        method: 'post',
+        success: (response) => {
+          if (response?.status) {
+            alert('successfully updated')
+            window.location.href = "/account"
+          } else {
+            alert(response?.message, '')
+            window.location.href = "/account"
           }
-        })
-    }else{
+        }
+      })
+    } else {
       e.currentTarget.submit();
     }
   })

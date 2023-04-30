@@ -19,19 +19,9 @@
                     
                         <%if (data?.length<1) {%>
                             <div class="row"style="align-content: center;justify-content: center;">
-                            <!-- <div class="ui icon message">
-                                <i class="fa-sharp fa-regular fa-cart-shopping"></i>                                
-                                <div class="content">
-                                  <div class="header">
-                                    Looks like your cart is empty                                  
-                                  </div>
-                                  <p>Get the best news in your e-mail every day.</p>
-                                </div>
-                              </div> -->
                               <div class="content"  >
                                 <h1>Your Cart is empty</h1>
                                 <a href="/home">Explore products</a>
-                                <!-- <a href="/orderlist">View orders</a> -->
                              </div>
                             </div>
                             <%} else {%>
@@ -147,22 +137,6 @@
                                                     <td>Shiping charge :</td>
                                                     <td>₹  0</td>
                                                 </tr>
-                                                <!-- <tr class="summary-shipping">
-                                                    <td>Shipping:</td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-        
-                                                <tr class="summary-shipping-row">
-                                                    <td>
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" id="free-shipping" name="shipping"
-                                                                class="custom-control-input">
-                                                            <label class="custom-control-label" for="free-shipping">Free
-                                                                Shipping</label>
-                                                        </div>
-                                                    </td>
-                                                    <td>$0.00</td>
-                                                </tr> -->
         
                                                 <tr class="summary-total">
                                                     <td>Total:</td>
@@ -209,7 +183,6 @@
             success: (response) => {
                 if (response) {
                     console.log('helo cart');
-                    // alert('Product was removed from cart')
                     window.location.reload()
                 } else {
                     console.log(response, ' ++++');
@@ -242,7 +215,6 @@
                         method: 'post',
                         success: (response) => {
                             if (response.removeProd) {
-                                // alert('Product removed from cart')
                                 location.reload()
                             }
                             else {
@@ -252,24 +224,6 @@
                 })
             }
         })
-        
-        // $.ajax({
-        //     url: '/removeCartProduct',
-        //     data: {
-        //         cartId: cartId,
-        //         proId: proId
-        //     },
-        //     method: 'post',
-        //     success: (response) => {
-        //         if (response.removeProd) {
-        //             alert('Product removed from cart')
-        //             location.reload()
-        //         }
-        //         else {
-        //             alert(' Error in removing product from cart')
-        //         }
-        //     }
-        // })
     }
 </script>
 

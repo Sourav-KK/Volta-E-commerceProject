@@ -348,7 +348,9 @@
                                                         <td>
                                                             <%onOffers?.OfferName %>
                                                         </td>
-                                                        <td><%onOffers?.OfferName %></td>
+                                                        <td>
+                                                            <%onOffers?.OfferName %>
+                                                        </td>
                                                         <td>
                                                         <td>
                                                         <td>
@@ -414,7 +416,7 @@
                                                                 class="text-danger d-flex justify-content-end w-75"></p>
                                                         </div>
                                                         <select name="productId" id="prodId">
-                                                            <option hidden disabled selected >Choose...</option>
+                                                            <option hidden disabled selected>Choose...</option>
 
                                                             <% products.forEach(element=> { %>
                                                                 <option value="<%=element._id %>">
@@ -426,7 +428,7 @@
                                                         </select>
 
                                                     </div>
-                                                    
+
 
                                                 </div>
                                                 <div class="col-md-10">
@@ -472,7 +474,6 @@
                     data: { bannerId },
                     success: (response) => {
                         if (response.status) {
-                            // alert('removed product succefully')
                             window.location.reload()
                         } else {
                             Swal.fire(
@@ -480,7 +481,6 @@
                                 'oops Something went wrong.',
                                 'error'
                             )
-                            //   window.location.reload()
                         }
                     }
                 })
